@@ -1,42 +1,53 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { ArrowRight, Play } from "lucide-react";
-import { assets, certificationImages, clientImages, image } from "@/lib/site-assets";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { ArrowRight, Building2, CheckCircle2, Home, KeyRound, MapPin, Search, ShieldCheck, Store, Users } from "lucide-react";
+import { FormEvent, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { PropertyCard } from "@/components/property-card";
+import { cities, properties } from "@/lib/properties";
+import heroImage from "@/assets/property-hero.jpg";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
   head: () => ({ meta: [
-    { title: "Sahyadri Farms - Seeding Goodness" },
-    { name: "description", content: "India's Leading Integrated Fruits and Vegetables value chain." },
-    { property: "og:title", content: "Sahyadri Farms - Seeding Goodness" },
-    { property: "og:description", content: "India's Leading Integrated Fruits and Vegetables value chain." },
+    { title: "ZameenDhan — Buy, Rent & Sell Property Without Brokerage" },
+    { name: "description", content: "Discover owner-listed homes and commercial property across India. Buy, rent or sell directly on ZameenDhan." },
+    { property: "og:title", content: "ZameenDhan — Property, without the middleman" },
+    { property: "og:description", content: "Find verified homes and commercial spaces across India." },
     { property: "og:type", content: "website" },
     { name: "twitter:card", content: "summary_large_image" },
-  ]}),
-  component: Index,
+  ]}), component: HomePage,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
-  const stats = [["30,000+","Registered farmers"],["45,000+","Acres of land"],["252+","Villages covered"],["46+","Countries served"],["4,000+","Customers worldwide"],["15+","Years in the industry"]];
-  const pillars = [
-    ["Largest integrated value chain","It's our equity and compensation policies, our promises to customers, or use of state-of-the-art technologies to make trust tangible, Sahyadri Farms has been leading the way on all fronts."],
-    ["Farm-to-fork traceability","Our farmers see what happens with their produce after it leaves their farm, and our consumers see details about their food, their farmer, and what happens with the money they pay."],
-    ["Safety and hygiene","At Sahyadri Farms, we ensure that we remain updated with the latest health norms. We follow global food safety standards at every step."],
-    ["Farmer-led initiative","Sahyadri Farms is an initiative fully led and managed by farmers who have complete understanding of the problems faced by small-landholding farmers."],
-  ];
-  return <div className="home-page">
-    <section className="home-hero" style={{ backgroundImage: `url(${image(assets.hero)})` }}>
-      <div className="hero-shade"/><div className="hero-copy content-width"><p className="hero-kicker">SEEDING GOODNESS</p><h1>India's Largest Integrated Fruits and Vegetables Value Chain</h1><p>A company of the farmers, by the farmers and for the farmers.</p><a className="primary-button" href="/about-us/our-story">Know More <ArrowRight size={18}/></a></div>
+function HomePage() {
+  const navigate = useNavigate();
+  const [purpose, setPurpose] = useState("Buy");
+  const [city, setCity] = useState("Bengaluru");
+  const [query, setQuery] = useState("");
+  const submit = (event: FormEvent) => { event.preventDefault(); navigate({ to: "/properties", search: { purpose, city, q: query } }); };
+  return <div>
+    <section className="market-hero" style={{ backgroundImage: `url(${heroImage})` }}>
+      <div className="hero-shade"/><div className="hero-content content-width">
+        <p className="hero-kicker">PROPERTY, WITHOUT THE MIDDLEMAN</p><h1>A better place to find your place.</h1><p>Buy, rent or sell verified homes and commercial spaces directly with owners across India.</p>
+        <form className="search-panel" onSubmit={submit}>
+          <div className="search-tabs" role="tablist">{["Buy","Rent","Commercial"].map(item => <Button type="button" variant="ghost" className={purpose === item ? "active" : ""} onClick={() => setPurpose(item)} key={item}>{item}</Button>)}</div>
+          <div className="search-fields"><label><MapPin size={19}/><span>City</span><select value={city} onChange={e => setCity(e.target.value)}>{cities.map(item => <option key={item}>{item}</option>)}</select></label><label className="location-field"><Search size={19}/><span>Locality or project</span><input value={query} onChange={e => setQuery(e.target.value)} placeholder="Try Whitefield, Worli, Baner..."/></label><Button type="submit" size="lg">Search properties <ArrowRight size={18}/></Button></div>
+        </form>
+        <div className="hero-trust"><span><CheckCircle2/>Verified listings</span><span><CheckCircle2/>Direct owner contact</span><span><CheckCircle2/>Zero brokerage</span></div>
+      </div>
     </section>
-    <section className="stats-section content-width"><h2>Welcome to Sahyadri Farms</h2><div className="stats-grid">{stats.map(([n,l],i)=><article className="stat" key={l}><img src={image(assets.stats.at(i) ?? assets.hero)} alt=""/><strong>{n}</strong><span>{l}</span></article>)}</div></section>
-    <section className="about-section"><div className="content-width split"><img src={image(assets.about)} alt="Aerial view of Sahyadri Farms"/><div><p className="eyebrow">WHO WE ARE</p><h2>About Sahyadri Farms</h2><p>Sahyadri is India’s largest integrated platform for fruits and vegetables. Through its unique inclusive partnership with farmers, the company has built strong capabilities in primary processing, frozen and aseptic foods, fruit products and waste processing under an integrated zero-discharge facility.</p><p>Sahyadri Farms began with the mission to ensure that small-landholding farmers of India receive fair compensation for their produce and labour, while following global agricultural and food-safety standards.</p><a className="primary-button" href="/about-us/our-story">Our Story <ArrowRight size={18}/></a></div></div></section>
-    <section className="infra-section content-width"><h2>Infrastructure and Technology</h2><div className="feature-grid"><article style={{backgroundImage:`url(${image(assets.infrastructure)})`}}><div><h3>Infrastructure</h3><p>Visit our world-class infrastructure at Mohadi, Nashik, with state-of-the-art facilities designed for scale, safety and quality.</p><a href="/post-harvest-infrastructure">Read More <ArrowRight size={18}/></a></div></article><article style={{backgroundImage:`url(${image(assets.grapes)})`}}><div><h3>Technology</h3><p>From monitoring growing practices to a real-time traceable supply chain, technology is encoded in our DNA.</p><a href="/food-safety/traceability">Read More <ArrowRight size={18}/></a></div></article></div></section>
-    <section className="pillars-section"><div className="content-width"><h2>Pillars of Sahyadri Farms</h2><div className="pillars-grid">{pillars.map(([h,p],i)=><article key={h}><img src={image(assets.pillars.at(i) ?? assets.logo)} alt=""/><h3>{h}</h3><p>{p}</p></article>)}</div></div></section>
-    <section className="logo-section content-width"><h2>Our Licences and Certifications</h2><div className="logo-grid certifications">{certificationImages.map((src,i)=><img src={src} alt={`Certification ${i+1}`} key={src}/>)}</div></section>
-    <section className="customers-section"><div className="content-width"><h2>Our Esteemed Customers</h2><div className="logo-grid customers">{clientImages.map((src,i)=><img src={src} alt={`Customer ${i+1}`} key={src}/>)}</div></div></section>
-    <section className="news-section content-width"><h2>What's New</h2><div className="news-grid"><article><img src={image(assets.grapes)} alt="Grapes at Sahyadri Farms"/><div><span>NEWS</span><h3>Building a farmer-led future through technology and trust</h3><a href="/pr-media">Explore News <ArrowRight size={18}/></a></div></article><article className="video-card" style={{backgroundImage:`url(${image(assets.about)})`}}><a href="https://www.youtube.com/@SahyadriFarms" aria-label="Watch Sahyadri Farms video"><Play size={30}/></a><h3>Experience Sahyadri Farms</h3></article></div></section>
-    <section className="careers"><div className="content-width"><div><p>GROW WITH US</p><h2>Careers</h2><span>Join a team driven by innovation, sustainability, and farmer prosperity.</span></div><a className="light-button" href="/careers">Apply Now <ArrowRight size={18}/></a></div></section>
+
+    <section className="market-stats content-width">{[["1.2L+","Active listings"],["80+","Indian cities"],["65K+","Happy families"],["₹0","Brokerage paid"]].map(([value,label])=><div key={label}><strong>{value}</strong><span>{label}</span></div>)}</section>
+
+    <section className="listing-section content-width"><div className="section-heading"><div><p className="eyebrow">HANDPICKED FOR YOU</p><h2>Homes worth discovering</h2></div><Link to="/properties" search={{ purpose: "Buy" }}>View all properties <ArrowRight size={17}/></Link></div><div className="property-grid">{properties.slice(0,4).map(property => <PropertyCard key={property.id} property={property}/>)}</div></section>
+
+    <section className="journey-section"><div className="content-width"><div className="section-heading light"><div><p className="eyebrow">THE ZAMEENDHAN WAY</p><h2>One platform. Every property journey.</h2></div></div><div className="journey-grid">
+      <Link to="/properties" search={{ purpose: "Buy" }}><Home/><span>01</span><h3>Buy a home</h3><p>Explore owner-listed apartments, villas and plots with transparent details.</p><b>Start exploring <ArrowRight/></b></Link>
+      <Link to="/properties" search={{ purpose: "Rent" }}><KeyRound/><span>02</span><h3>Rent your next place</h3><p>Find a home that fits your lifestyle and connect directly with the owner.</p><b>Find rentals <ArrowRight/></b></Link>
+      <Link to="/post-property"><Users/><span>03</span><h3>Sell or let property</h3><p>Post in minutes and speak to serious buyers and tenants without brokerage.</p><b>Post for free <ArrowRight/></b></Link>
+      <Link to="/commercial"><Store/><span>04</span><h3>Go commercial</h3><p>Discover offices, shops and workspaces in India's leading business hubs.</p><b>View commercial <ArrowRight/></b></Link>
+    </div></div></section>
+
+    <section className="city-section content-width"><div className="section-heading"><div><p className="eyebrow">EXPLORE INDIA</p><h2>Popular cities</h2></div></div><div className="city-grid">{cities.map((item,index)=><Link to="/properties" search={{ city:item, purpose:"Buy" }} key={item}><span>0{index+1}</span><h3>{item}</h3><p>{properties.filter(p=>p.city===item).length * 124 + 840} properties</p><ArrowRight/></Link>)}</div></section>
+
+    <section className="owner-section"><div className="content-width owner-grid"><div><p className="eyebrow">FOR PROPERTY OWNERS</p><h2>Your property deserves genuine attention.</h2><p>List directly, choose who contacts you and manage every enquiry from one simple place.</p><ul><li><ShieldCheck/>Owner verification for stronger trust</li><li><Building2/>Residential and commercial listings</li><li><Users/>Direct access to serious seekers</li></ul><Button asChild size="lg"><Link to="/post-property">Post property free <ArrowRight/></Link></Button></div><div className="owner-quote"><p>“Within a week, I found a family for my apartment without paying a rupee in brokerage.”</p><strong>Arvind Menon</strong><span>Property owner, Bengaluru</span></div></div></section>
   </div>;
 }

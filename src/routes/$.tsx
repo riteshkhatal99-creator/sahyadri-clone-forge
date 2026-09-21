@@ -1,56 +1,15 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { assets, image } from "@/lib/site-assets";
+import { Button } from "@/components/ui/button";
 
-const pages: Record<string, { title: string; eyebrow: string; description: string }> = {
-  "about-us/our-story": { title: "Our Story", eyebrow: "ABOUT US", description: "A farmer-led journey built on fair compensation, world-class practices and the belief that goodness grows when everyone prospers." },
-  "about-us/our-team": { title: "Our Team", eyebrow: "ABOUT US", description: "Meet the farmer leaders, professionals and partners shaping India’s largest integrated fruits and vegetables value chain." },
-  "about-us/milestones": { title: "Milestones", eyebrow: "ABOUT US", description: "From a farmer collective in Nashik to a globally trusted integrated value chain." },
-  "post-harvest-infrastructure": { title: "Post Harvest Infrastructure", eyebrow: "INFRASTRUCTURE", description: "State-of-the-art facilities built for scale, food safety, quality and complete value-chain integration." },
-  "about-us/skill-development-centre": { title: "Skill Development Centre", eyebrow: "INFRASTRUCTURE", description: "Sharing practical knowledge and modern agricultural skills with farmers and future leaders." },
-  "investor-relation": { title: "Investor Relation", eyebrow: "SAHYADRI FARMS", description: "Corporate information and resources for the Sahyadri Farms investor community." },
-  "products/core-crops": { title: "Core Crops", eyebrow: "OUR PRODUCTS", description: "High-quality produce cultivated through responsible farming, precision practices and complete traceability." },
-  "products/fresh-fruits": { title: "Fresh Fruits", eyebrow: "OUR PRODUCTS", description: "Fresh, safe and traceable fruits grown by our farmer community for customers across the world." },
-  "products/processed-fruits-and-vegetables": { title: "Processed Foods", eyebrow: "OUR PRODUCTS", description: "World-class processing preserves freshness, flavour and nutrition from farm to final product." },
-  "products/dry-fruits": { title: "Dry Fruits", eyebrow: "OUR PRODUCTS", description: "Carefully processed products made to exacting standards of quality, consistency and food safety." },
-  "frozen-vegetables-wholesale-preservative-free-fruits": { title: "Kitchen Culture", eyebrow: "OUR PRODUCTS", description: "Convenient, preservative-free frozen fruits and vegetables from a fully traceable supply chain." },
-  "bio-actives": { title: "BioActives", eyebrow: "INNOVATION", description: "Creating high-value natural ingredients through science, circularity and responsible processing." },
-  "food-safety/standards": { title: "Food Safety Standards", eyebrow: "FOOD SAFETY", description: "Global systems, certifications and rigorous controls protect quality at every stage." },
-  "food-safety/traceability": { title: "Farm-to-Fork Traceability", eyebrow: "FOOD SAFETY", description: "Transparent digital systems connect every product with its farmer, field and journey." },
-  "sustainability/environment": { title: "Environment", eyebrow: "SUSTAINABILITY", description: "Responsible water, energy and waste practices help agriculture thrive for generations." },
-  "sustainability/transparency-and-fair-equity": { title: "Transparency and Fair Equity", eyebrow: "SUSTAINABILITY", description: "A value chain designed to create trust, visibility and equitable returns for farmers." },
-  "expert-association": { title: "Association with Experts", eyebrow: "COLLABORATION", description: "Working with leading specialists to advance agriculture, food technology and farmer prosperity." },
-  "careers": { title: "Careers", eyebrow: "GROW WITH US", description: "Build a meaningful career with a team driven by innovation, sustainability and positive impact in agriculture." },
-  "experience-sahyadri": { title: "Experience Sahyadri", eyebrow: "VISIT US", description: "See how farms, people, technology and world-class infrastructure come together at Sahyadri Farms." },
-  "pr-media": { title: "PR & Media", eyebrow: "LATEST UPDATES", description: "News, announcements and stories from across the Sahyadri Farms community." },
-  "blog": { title: "Blogs", eyebrow: "INSIGHTS", description: "Ideas and stories about farming, food, technology, sustainability and farmer-led progress." },
-  "contact-us": { title: "Contact Us", eyebrow: "GET IN TOUCH", description: "Connect with Sahyadri Farms for products, partnerships, visits and general enquiries." },
-  "csr": { title: "CSR", eyebrow: "COMMUNITY", description: "Supporting resilient rural communities through meaningful, long-term initiatives." },
-  "privacy-policy": { title: "Privacy Policy", eyebrow: "SAHYADRI FARMS", description: "How Sahyadri Farms handles and protects information shared through its website and services." },
-  "terms-of-use": { title: "Terms of Use", eyebrow: "SAHYADRI FARMS", description: "Terms governing the use of the Sahyadri Farms website and digital services." },
+const pages: Record<string, { title: string; eyebrow: string; description: string; body: string }> = {
+  about: { title: "Built for direct property decisions", eyebrow: "ABOUT ZAMEENDHAN", description: "We help people buy, rent and sell property with clarity, confidence and no unnecessary middlemen.", body: "ZameenDhan brings owners and property seekers together through transparent listings and straightforward conversations. Our goal is to make every step—from discovery to the first visit—simpler and more trustworthy." },
+  contact: { title: "We're here to help", eyebrow: "CONTACT US", description: "Speak with our team about a listing, search or account question.", body: "Call us on 1800 309 2233 from 9:00 AM to 7:00 PM, Monday to Saturday, or email hello@zameendhan.in. We aim to respond within one working day." },
+  privacy: { title: "Privacy policy", eyebrow: "YOUR INFORMATION", description: "A clear overview of how ZameenDhan handles information shared through the platform.", body: "We collect only the information needed to provide property discovery and listing services. We do not sell personal information. Contact details are shared only when you choose to connect about a property." },
+  terms: { title: "Terms of use", eyebrow: "PLATFORM TERMS", description: "The terms that govern use of the ZameenDhan marketplace.", body: "Listings and property details are provided by owners and advertisers. Users should independently verify ownership, approvals, measurements and commercial terms before making a transaction." },
+  login: { title: "Welcome back", eyebrow: "SIGN IN", description: "Access saved properties, enquiries and your owner dashboard.", body: "Account access will be available when secure user accounts are connected. You can continue browsing all current listings without signing in." },
 };
 
-export const Route = createFileRoute("/$")({
-  head: ({ params }) => {
-    const page = pages[params._splat ?? ""] ?? { title: "Sahyadri Farms", description: "India's leading integrated fruits and vegetables value chain." };
-    return { meta: [
-      { title: `${page.title} | Sahyadri Farms` },
-      { name: "description", content: page.description },
-      { property: "og:title", content: `${page.title} | Sahyadri Farms` },
-      { property: "og:description", content: page.description },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ] };
-  },
-  component: ContentPage,
-});
+export const Route = createFileRoute("/$")({ head: ({ params }) => { const page = pages[params._splat ?? ""] ?? { title:"Page not found", description:"The requested ZameenDhan page is unavailable." }; return { meta:[{title:`${page.title} | ZameenDhan`},{name:"description",content:page.description},{property:"og:title",content:`${page.title} | ZameenDhan`},{property:"og:description",content:page.description},{property:"og:type",content:"website"},{name:"twitter:card",content:"summary_large_image"}]}; }, component: InfoPage });
 
-function ContentPage() {
-  const { _splat } = Route.useParams();
-  const page = pages[_splat ?? ""];
-  if (!page) return <section className="simple-page"><div className="content-width"><p className="eyebrow">SAHYADRI FARMS</p><h1>Page not found</h1><Link className="primary-button" to="/"><ArrowLeft size={18}/> Back to Home</Link></div></section>;
-  return <>
-    <section className="interior-hero" style={{ backgroundImage: `url(${image(assets.hero)})` }}><div className="hero-shade"/><div className="content-width"><p>{page.eyebrow}</p><h1>{page.title}</h1></div></section>
-    <section className="interior-body content-width"><div><p className="eyebrow">SEEDING GOODNESS</p><h2>{page.title}</h2><p>{page.description}</p><p>Sahyadri Farms works through an inclusive partnership with farmers, combining agricultural knowledge, advanced infrastructure, technology and global food-safety practices. Every part of the value chain is built to deliver quality to customers and lasting value to farming communities.</p><Link className="primary-button" to="/">Explore Sahyadri Farms <ArrowRight size={18}/></Link></div><img src={image(assets.about)} alt="Sahyadri Farms campus and facilities"/></section>
-  </>;
-}
+function InfoPage() { const { _splat } = Route.useParams(); const page = pages[_splat ?? ""]; if (!page) return <section className="simple-page"><div><p className="eyebrow">ZAMEENDHAN</p><h1>Page not found</h1><Button asChild><Link to="/"><ArrowLeft/>Back home</Link></Button></div></section>; return <><section className="page-banner"><div className="content-width"><p className="eyebrow">{page.eyebrow}</p><h1>{page.title}</h1><p>{page.description}</p></div></section><section className="info-body content-width"><p>{page.body}</p><Button asChild><Link to="/properties" search={{purpose:"Buy"}}>Explore properties <ArrowRight/></Link></Button></section></>; }
