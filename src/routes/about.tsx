@@ -1,0 +1,4 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { InfoPage } from "@/components/info-page";
+const description="We help people buy, rent and sell property with clarity, confidence and no unnecessary middlemen.";
+export const Route=createFileRoute("/about")({head:()=>({meta:[{title:"About ZameenDhan"},{name:"description",content:description},{property:"og:title",content:"About ZameenDhan"},{property:"og:description",content:description},{property:"og:type",content:"website"},{name:"twitter:card",content:"summary_large_image"}]}),component:()=> <InfoPage eyebrow="ABOUT ZAMEENDHAN" title="Built for direct property decisions" description={description} body="ZameenDhan brings owners and property seekers together through transparent listings and straightforward conversations. Our goal is to make every step—from discovery to the first visit—simpler and more trustworthy."/>});
