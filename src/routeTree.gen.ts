@@ -11,9 +11,14 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SplatRouteImport } from './routes/$'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as CommercialRouteImport } from './routes/commercial'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as PostPropertyRouteImport } from './routes/post-property'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as PropertiesRouteImport } from './routes/properties'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as PropertyIdRouteImport } from './routes/property.$id'
 
 const IndexRoute = IndexRouteImport.update({
@@ -26,9 +31,24 @@ const SplatRoute = SplatRouteImport.update({
   path: '/$',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CommercialRoute = CommercialRouteImport.update({
   id: '/commercial',
   path: '/commercial',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PostPropertyRoute = PostPropertyRouteImport.update({
@@ -36,9 +56,19 @@ const PostPropertyRoute = PostPropertyRouteImport.update({
   path: '/post-property',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PropertiesRoute = PropertiesRouteImport.update({
   id: '/properties',
   path: '/properties',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PropertyIdRoute = PropertyIdRouteImport.update({
@@ -50,26 +80,41 @@ const PropertyIdRoute = PropertyIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
+  '/about': typeof AboutRoute
   '/commercial': typeof CommercialRoute
+  '/contact': typeof ContactRoute
+  '/login': typeof LoginRoute
   '/post-property': typeof PostPropertyRoute
+  '/privacy': typeof PrivacyRoute
   '/properties': typeof PropertiesRoute
+  '/terms': typeof TermsRoute
   '/property/$id': typeof PropertyIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
+  '/about': typeof AboutRoute
   '/commercial': typeof CommercialRoute
+  '/contact': typeof ContactRoute
+  '/login': typeof LoginRoute
   '/post-property': typeof PostPropertyRoute
+  '/privacy': typeof PrivacyRoute
   '/properties': typeof PropertiesRoute
+  '/terms': typeof TermsRoute
   '/property/$id': typeof PropertyIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
+  '/about': typeof AboutRoute
   '/commercial': typeof CommercialRoute
+  '/contact': typeof ContactRoute
+  '/login': typeof LoginRoute
   '/post-property': typeof PostPropertyRoute
+  '/privacy': typeof PrivacyRoute
   '/properties': typeof PropertiesRoute
+  '/terms': typeof TermsRoute
   '/property/$id': typeof PropertyIdRoute
 }
 export interface FileRouteTypes {
@@ -77,34 +122,54 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/$'
+    | '/about'
     | '/commercial'
+    | '/contact'
+    | '/login'
     | '/post-property'
+    | '/privacy'
     | '/properties'
+    | '/terms'
     | '/property/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/$'
+    | '/about'
     | '/commercial'
+    | '/contact'
+    | '/login'
     | '/post-property'
+    | '/privacy'
     | '/properties'
+    | '/terms'
     | '/property/$id'
   id:
     | '__root__'
     | '/'
     | '/$'
+    | '/about'
     | '/commercial'
+    | '/contact'
+    | '/login'
     | '/post-property'
+    | '/privacy'
     | '/properties'
+    | '/terms'
     | '/property/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   SplatRoute: typeof SplatRoute
+  AboutRoute: typeof AboutRoute
   CommercialRoute: typeof CommercialRoute
+  ContactRoute: typeof ContactRoute
+  LoginRoute: typeof LoginRoute
   PostPropertyRoute: typeof PostPropertyRoute
+  PrivacyRoute: typeof PrivacyRoute
   PropertiesRoute: typeof PropertiesRoute
+  TermsRoute: typeof TermsRoute
   PropertyIdRoute: typeof PropertyIdRoute
 }
 
@@ -124,11 +189,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SplatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/commercial': {
       id: '/commercial'
       path: '/commercial'
       fullPath: '/commercial'
       preLoaderRoute: typeof CommercialRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/post-property': {
@@ -138,11 +224,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PostPropertyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/properties': {
       id: '/properties'
       path: '/properties'
       fullPath: '/properties'
       preLoaderRoute: typeof PropertiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/property/$id': {
@@ -158,9 +258,14 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   SplatRoute: SplatRoute,
+  AboutRoute: AboutRoute,
   CommercialRoute: CommercialRoute,
+  ContactRoute: ContactRoute,
+  LoginRoute: LoginRoute,
   PostPropertyRoute: PostPropertyRoute,
+  PrivacyRoute: PrivacyRoute,
   PropertiesRoute: PropertiesRoute,
+  TermsRoute: TermsRoute,
   PropertyIdRoute: PropertyIdRoute,
 }
 export const routeTree = rootRouteImport
