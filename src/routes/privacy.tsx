@@ -1,0 +1,4 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { InfoPage } from "@/components/info-page";
+const description="A clear overview of how ZameenDhan handles information shared through the platform.";
+export const Route=createFileRoute("/privacy")({head:()=>({meta:[{title:"Privacy Policy | ZameenDhan"},{name:"description",content:description},{property:"og:title",content:"Privacy Policy | ZameenDhan"},{property:"og:description",content:description},{property:"og:type",content:"website"},{name:"twitter:card",content:"summary_large_image"}]}),component:()=> <InfoPage eyebrow="YOUR INFORMATION" title="Privacy policy" description={description} body="We collect only the information needed to provide property discovery and listing services. We do not sell personal information. Contact details are shared only when you choose to connect about a property."/>});

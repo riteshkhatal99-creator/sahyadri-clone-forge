@@ -1,0 +1,4 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { InfoPage } from "@/components/info-page";
+const description="The terms that govern use of the ZameenDhan marketplace.";
+export const Route=createFileRoute("/terms")({head:()=>({meta:[{title:"Terms of Use | ZameenDhan"},{name:"description",content:description},{property:"og:title",content:"Terms of Use | ZameenDhan"},{property:"og:description",content:description},{property:"og:type",content:"website"},{name:"twitter:card",content:"summary_large_image"}]}),component:()=> <InfoPage eyebrow="PLATFORM TERMS" title="Terms of use" description={description} body="Listings and property details are provided by owners and advertisers. Users should independently verify ownership, approvals, measurements and commercial terms before making a transaction."/>});
