@@ -1,9 +1,10 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { ArrowRight, Building2, CheckCircle2, Home, KeyRound, MapPin, Search, ShieldCheck, Store, Users } from "lucide-react";
 import { FormEvent, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { PropertyCard } from "@/components/property-card";
-import { cities, properties } from "@/lib/properties";
+import { cities, listProperties } from "@/lib/properties";
 import heroImage from "@/assets/property-hero.jpg";
 
 export const Route = createFileRoute("/")({
@@ -22,6 +23,8 @@ function HomePage() {
   const [purpose, setPurpose] = useState("Buy");
   const [city, setCity] = useState("Bengaluru");
   const [query, setQuery] = useState("");
+  const { data: properties = [] } = useQuery({ queryKey: ["properties"], queryFn: listProperties });
+  const featured = properties.filter((p) => p.featured).slice(0, 4);
   const submit = (event: FormEvent) => { event.preventDefault(); navigate({ to: "/properties", search: { purpose, city, q: query } }); };
   return <div>
     <section className="market-hero" style={{ backgroundImage: `url(${heroImage})` }}>
@@ -37,7 +40,7 @@ function HomePage() {
 
     <section className="market-stats content-width">{[["1.2L+","Active listings"],["80+","Indian cities"],["65K+","Happy families"],["₹0","Brokerage paid"]].map(([value,label])=><div key={label}><strong>{value}</strong><span>{label}</span></div>)}</section>
 
-    <section className="listing-section content-width"><div className="section-heading"><div><p className="eyebrow">HANDPICKED FOR YOU</p><h2>Homes worth discovering</h2></div><Link to="/properties" search={{ purpose: "Buy" }}>View all properties <ArrowRight size={17}/></Link></div><div className="property-grid">{properties.slice(0,4).map(property => <PropertyCard key={property.id} property={property}/>)}</div></section>
+    <section className="listing-section content-width"><div className="section-heading"><div><p className="eyebrow">HANDPICKED FOR YOU</p><h2>Homes worth discovering</h2></div><Link to="/properties" search={{ purpose: "Buy" }}>View all properties <ArrowRight size={17}/></Link></div><div className="property-grid">{(featured.length ? featured : properties.slice(0,4)).map(property => <PropertyCard key={property.id} property={property}/>)}</div></section>
 
     <section className="journey-section"><div className="content-width"><div className="section-heading light"><div><p className="eyebrow">THE ZAMEENDHAN WAY</p><h2>One platform. Every property journey.</h2></div></div><div className="journey-grid">
       <Link to="/properties" search={{ purpose: "Buy" }}><Home/><span>01</span><h3>Buy a home</h3><p>Explore owner-listed apartments, villas and plots with transparent details.</p><b>Start exploring <ArrowRight/></b></Link>

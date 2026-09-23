@@ -1,7 +1,9 @@
-import { Link } from "@tanstack/react-router";
-import { Building2, Facebook, Instagram, Linkedin, Mail, MapPin, Menu, Phone, X, Youtube } from "lucide-react";
+import { Link, useNavigate } from "@tanstack/react-router";
+import { Building2, Facebook, Instagram, LayoutDashboard, Linkedin, LogOut, Mail, MapPin, Menu, Phone, X, Youtube } from "lucide-react";
 import { useState, type ReactNode } from "react";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/hooks/use-auth";
+import { supabase } from "@/integrations/supabase/client";
 
 function Brand() {
   return <span className="brand" aria-label="ZameenDhan"><span className="brand-mark"><span/></span><strong>Zameen</strong><b>Dhan</b></span>;
@@ -9,7 +11,10 @@ function Brand() {
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const { user } = useAuth();
+  const navigate = useNavigate();
   const close = () => setOpen(false);
+  const signOut = async () => { await supabase.auth.signOut(); close(); navigate({ to: "/" }); };
   return <header className="site-header">
     <div className="site-nav">
       <Link to="/" onClick={close}><Brand/></Link>
@@ -19,9 +24,15 @@ export function Header() {
         <Link to="/commercial" onClick={close}>Commercial</Link>
         <Link to="/properties" search={{ purpose: "Buy", type: "Plot" }} onClick={close}>Plots</Link>
         <Link to="/about" onClick={close}>About</Link>
+        {user && <Link to="/dashboard" onClick={close}>Dashboard</Link>}
       </nav>
       <div className="nav-actions">
-        <Button asChild variant="outline" className="login-button"><Link to="/login">Sign in</Link></Button>
+        {user
+          ? <>
+              <Button asChild variant="outline" className="login-button"><Link to="/dashboard"><LayoutDashboard size={16}/>Dashboard</Link></Button>
+              <Button variant="ghost" size="icon" onClick={signOut} aria-label="Sign out"><LogOut size={17}/></Button>
+            </>
+          : <Button asChild variant="outline" className="login-button"><Link to="/login">Sign in</Link></Button>}
         <Button asChild className="post-button"><Link to="/post-property">Post property free</Link></Button>
       </div>
       <Button variant="ghost" size="icon" className="menu-toggle" onClick={() => setOpen(!open)} aria-label={open ? "Close menu" : "Open menu"}>{open ? <X/> : <Menu/>}</Button>
