@@ -14,7 +14,198 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      favorites: {
+        Row: {
+          created_at: string
+          property_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          property_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          property_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "favorites_property_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: false
+            referencedRelation: "properties"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "favorites_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      inquiries: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          message: string
+          name: string
+          owner_id: string | null
+          phone: string | null
+          property_id: string
+          sender_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          message?: string
+          name: string
+          owner_id?: string | null
+          phone?: string | null
+          property_id: string
+          sender_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          message?: string
+          name?: string
+          owner_id?: string | null
+          phone?: string | null
+          property_id?: string
+          sender_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "inquiries_owner_id_fkey"
+            columns: ["owner_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "inquiries_property_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: false
+            referencedRelation: "properties"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "inquiries_sender_id_fkey"
+            columns: ["sender_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          full_name: string
+          id: string
+          phone: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          full_name?: string
+          id: string
+          phone?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          full_name?: string
+          id?: string
+          phone?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      properties: {
+        Row: {
+          amenities: string[]
+          area: number
+          baths: number
+          beds: number
+          city: string
+          created_at: string
+          description: string
+          featured: boolean
+          id: string
+          image_key: string | null
+          image_path: string | null
+          locality: string
+          owner_id: string | null
+          price_display: string
+          price_value: number
+          purpose: string
+          status: string
+          title: string
+          type: string
+          updated_at: string
+        }
+        Insert: {
+          amenities?: string[]
+          area?: number
+          baths?: number
+          beds?: number
+          city: string
+          created_at?: string
+          description?: string
+          featured?: boolean
+          id?: string
+          image_key?: string | null
+          image_path?: string | null
+          locality?: string
+          owner_id?: string | null
+          price_display?: string
+          price_value?: number
+          purpose?: string
+          status?: string
+          title: string
+          type?: string
+          updated_at?: string
+        }
+        Update: {
+          amenities?: string[]
+          area?: number
+          baths?: number
+          beds?: number
+          city?: string
+          created_at?: string
+          description?: string
+          featured?: boolean
+          id?: string
+          image_key?: string | null
+          image_path?: string | null
+          locality?: string
+          owner_id?: string | null
+          price_display?: string
+          price_value?: number
+          purpose?: string
+          status?: string
+          title?: string
+          type?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "properties_owner_id_fkey"
+            columns: ["owner_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
