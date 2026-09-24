@@ -2,12 +2,14 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Building2, Store, Warehouse } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PropertyCard } from "@/components/property-card";
-import { properties } from "@/lib/properties";
+import { useQuery } from "@tanstack/react-query";
+import { listProperties } from "@/lib/properties";
 import officeImage from "@/assets/property-office.jpg";
 
 export const Route = createFileRoute("/commercial")({ head:()=>({meta:[{title:"Commercial Property in India | ZameenDhan"},{name:"description",content:"Find offices, shops and commercial property for sale or rent across India."},{property:"og:title",content:"Commercial Property | ZameenDhan"},{property:"og:description",content:"Workspaces and commercial investments, directly from owners."},{property:"og:type",content:"website"},{name:"twitter:card",content:"summary_large_image"}]}), component: CommercialPage });
 function CommercialPage(){
-  const commercial=properties.filter(p=>p.purpose==="Commercial");
+  const { data: all = [] } = useQuery({ queryKey: ["properties"], queryFn: listProperties });
+  const commercial=all.filter((p)=>p.purpose==="Commercial");
   const types = [
     { Icon: Building2, label: "Office spaces" },
     { Icon: Store, label: "Retail shops" },

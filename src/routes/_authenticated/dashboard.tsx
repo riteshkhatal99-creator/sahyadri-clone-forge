@@ -60,7 +60,7 @@ function DashboardPage() {
   };
 
   return <section className="dashboard-page content-width">
-    <div className="dashboard-head"><div><p className="eyebrow">MY ACCOUNT</p><h1>Welcome{user?.user_metadata?.full_name ? `, ${user.user_metadata.full_name}` : ""}</h1><p>{user?.email}</p></div><Button asChild size="lg"><Link to="/post-property"><Plus/>Post property</Link></Button></div>
+    <div className="dashboard-head"><div><p className="eyebrow">MY ACCOUNT</p><h1>Welcome{user?.user_metadata?.["full_name"] ? `, ${user.user_metadata["full_name"]}` : ""}</h1><p>{user?.email}</p></div><Button asChild size="lg"><Link to="/post-property"><Plus/>Post property</Link></Button></div>
     <div className="dashboard-tabs" role="tablist">
       <Button variant={tab==="listings"?"default":"outline"} onClick={()=>setTab("listings")}><Building2 size={16}/>My listings ({myListings.length})</Button>
       <Button variant={tab==="inquiries"?"default":"outline"} onClick={()=>setTab("inquiries")}><Inbox size={16}/>Enquiries ({inquiries.length})</Button>
