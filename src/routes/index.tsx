@@ -38,7 +38,7 @@ function HomePage() {
       </div>
     </section>
 
-    <section className="market-stats content-width">{[["1.2L+","Active listings"],["80+","Indian cities"],["65K+","Happy families"],["₹0","Brokerage paid"]].map(([value,label])=><div key={label}><strong>{value}</strong><span>{label}</span></div>)}</section>
+    <section className="market-stats content-width">{[[String(properties.length),"Active listings"],[String(new Set(properties.map(p=>p.city)).size),"Cities covered"],["₹0","Brokerage paid"],["100%","Owner listed"]].map(([value,label])=><div key={label}><strong>{value}</strong><span>{label}</span></div>)}</section>
 
     <section className="listing-section content-width"><div className="section-heading"><div><p className="eyebrow">HANDPICKED FOR YOU</p><h2>Homes worth discovering</h2></div><Link to="/properties" search={{ purpose: "Buy" }}>View all properties <ArrowRight size={17}/></Link></div><div className="property-grid">{(featured.length ? featured : properties.slice(0,4)).map(property => <PropertyCard key={property.id} property={property}/>)}</div></section>
 
@@ -51,6 +51,6 @@ function HomePage() {
 
     <section className="city-section content-width"><div className="section-heading"><div><p className="eyebrow">EXPLORE INDIA</p><h2>Popular cities</h2></div></div><div className="city-grid">{cities.map((item,index)=><Link to="/properties" search={{ city:item, purpose:"Buy" }} key={item}><span>0{index+1}</span><h3>{item}</h3><p>{properties.filter(p=>p.city===item).length} {properties.filter(p=>p.city===item).length===1?"property":"properties"}</p><ArrowRight/></Link>)}</div></section>
 
-    <section className="owner-section"><div className="content-width owner-grid"><div><p className="eyebrow">FOR PROPERTY OWNERS</p><h2>Your property deserves genuine attention.</h2><p>List directly, choose who contacts you and manage every enquiry from one simple place.</p><ul><li><ShieldCheck/>Owner verification for stronger trust</li><li><Building2/>Residential and commercial listings</li><li><Users/>Direct access to serious seekers</li></ul><Button asChild size="lg"><Link to="/post-property">Post property free <ArrowRight/></Link></Button></div><div className="owner-quote"><p>“Within a week, I found a family for my apartment without paying a rupee in brokerage.”</p><strong>Arvind Menon</strong><span>Property owner, Bengaluru</span></div></div></section>
+    <section className="owner-section"><div className="content-width owner-grid"><div><p className="eyebrow">FOR PROPERTY OWNERS</p><h2>Your property deserves genuine attention.</h2><p>List directly, choose who contacts you and manage every enquiry from one simple place.</p><ul><li><ShieldCheck/>Owner verification for stronger trust</li><li><Building2/>Residential and commercial listings</li><li><Users/>Direct access to serious seekers</li></ul><Button asChild size="lg"><Link to="/post-property">Post property free <ArrowRight/></Link></Button></div><div className="owner-quote"><p>“List your property in minutes and hear directly from genuine buyers and tenants — no brokers, no commission.”</p><strong>Zero brokerage. Always.</strong><span>The ZameenDhan promise</span></div></div></section>
   </div>;
 }
