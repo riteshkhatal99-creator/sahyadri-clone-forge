@@ -8,3 +8,6 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+## Theme architecture
+- Keep shared colors and typography in global semantic CSS tokens, with web fonts loaded by the root route; this keeps every marketplace page visually consistent.
