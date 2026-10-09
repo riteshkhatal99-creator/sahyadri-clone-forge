@@ -14,6 +14,139 @@ export type Database = {
   }
   public: {
     Tables: {
+      auction_registrations: {
+        Row: {
+          auction_id: string
+          created_at: string
+          emd_status: string
+          user_id: string
+        }
+        Insert: {
+          auction_id: string
+          created_at?: string
+          emd_status?: string
+          user_id: string
+        }
+        Update: {
+          auction_id?: string
+          created_at?: string
+          emd_status?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "auction_registrations_auction_id_fkey"
+            columns: ["auction_id"]
+            isOneToOne: false
+            referencedRelation: "auctions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      auctions: {
+        Row: {
+          balance_due_hours: number
+          bid_count: number
+          bid_step: number
+          carpet_area: number
+          city: string
+          created_at: string
+          created_by: string | null
+          current_price: number
+          current_winner: string | null
+          description: string
+          emd_amount: number
+          ends_at: string
+          extension_minutes: number
+          id: string
+          image_path: string | null
+          locality: string
+          property_type: string
+          reserve_price: number
+          starts_at: string
+          status: string
+          title: string
+        }
+        Insert: {
+          balance_due_hours?: number
+          bid_count?: number
+          bid_step?: number
+          carpet_area?: number
+          city?: string
+          created_at?: string
+          created_by?: string | null
+          current_price?: number
+          current_winner?: string | null
+          description?: string
+          emd_amount?: number
+          ends_at: string
+          extension_minutes?: number
+          id?: string
+          image_path?: string | null
+          locality?: string
+          property_type?: string
+          reserve_price: number
+          starts_at: string
+          status?: string
+          title: string
+        }
+        Update: {
+          balance_due_hours?: number
+          bid_count?: number
+          bid_step?: number
+          carpet_area?: number
+          city?: string
+          created_at?: string
+          created_by?: string | null
+          current_price?: number
+          current_winner?: string | null
+          description?: string
+          emd_amount?: number
+          ends_at?: string
+          extension_minutes?: number
+          id?: string
+          image_path?: string | null
+          locality?: string
+          property_type?: string
+          reserve_price?: number
+          starts_at?: string
+          status?: string
+          title?: string
+        }
+        Relationships: []
+      }
+      bids: {
+        Row: {
+          amount: number
+          auction_id: string
+          created_at: string
+          id: string
+          user_id: string
+        }
+        Insert: {
+          amount: number
+          auction_id: string
+          created_at?: string
+          id?: string
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          auction_id?: string
+          created_at?: string
+          id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bids_auction_id_fkey"
+            columns: ["auction_id"]
+            isOneToOne: false
+            referencedRelation: "auctions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       favorites: {
         Row: {
           created_at: string
@@ -105,8 +238,42 @@ export type Database = {
           },
         ]
       }
+      payments: {
+        Row: {
+          amount: number
+          created_at: string
+          id: string
+          kind: string
+          provider_ref: string | null
+          ref_id: string
+          status: string
+          user_id: string
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          id?: string
+          kind: string
+          provider_ref?: string | null
+          ref_id: string
+          status?: string
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          id?: string
+          kind?: string
+          provider_ref?: string | null
+          ref_id?: string
+          status?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
+          account_type: string
           created_at: string
           full_name: string
           id: string
@@ -114,6 +281,7 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          account_type?: string
           created_at?: string
           full_name?: string
           id: string
@@ -121,6 +289,7 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          account_type?: string
           created_at?: string
           full_name?: string
           id?: string
@@ -206,15 +375,151 @@ export type Database = {
           },
         ]
       }
+      request_updates: {
+        Row: {
+          author_id: string
+          created_at: string
+          file_path: string | null
+          from_team: boolean
+          id: string
+          message: string
+          request_id: string
+        }
+        Insert: {
+          author_id: string
+          created_at?: string
+          file_path?: string | null
+          from_team?: boolean
+          id?: string
+          message?: string
+          request_id: string
+        }
+        Update: {
+          author_id?: string
+          created_at?: string
+          file_path?: string | null
+          from_team?: boolean
+          id?: string
+          message?: string
+          request_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "request_updates_request_id_fkey"
+            columns: ["request_id"]
+            isOneToOne: false
+            referencedRelation: "service_requests"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      service_requests: {
+        Row: {
+          category: string
+          created_at: string
+          details: Json
+          fee: number
+          id: string
+          paid: boolean
+          ref_no: number
+          service_slug: string
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          details?: Json
+          fee?: number
+          id?: string
+          paid?: boolean
+          ref_no?: never
+          service_slug: string
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          details?: Json
+          fee?: number
+          id?: string
+          paid?: boolean
+          ref_no?: never
+          service_slug?: string
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
+      place_bid: {
+        Args: { _amount: number; _auction: string }
+        Returns: {
+          balance_due_hours: number
+          bid_count: number
+          bid_step: number
+          carpet_area: number
+          city: string
+          created_at: string
+          created_by: string | null
+          current_price: number
+          current_winner: string | null
+          description: string
+          emd_amount: number
+          ends_at: string
+          extension_minutes: number
+          id: string
+          image_path: string | null
+          locality: string
+          property_type: string
+          reserve_price: number
+          starts_at: string
+          status: string
+          title: string
+        }
+        SetofOptions: {
+          from: "*"
+          to: "auctions"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -341,6 +646,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "user"],
+    },
   },
 } as const
