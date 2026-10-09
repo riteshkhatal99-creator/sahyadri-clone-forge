@@ -22,6 +22,8 @@ import { Route as PropertiesRouteImport } from './routes/properties'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as PropertyIdRouteImport } from './routes/property.$id'
+import { Route as ServicesCategoryRouteImport } from './routes/services.$category'
+import { Route as AuthenticatedRequestServiceRouteImport } from './routes/_authenticated/request.$service'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -87,6 +89,17 @@ const PropertyIdRoute = PropertyIdRouteImport.update({
   path: '/property/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicesCategoryRoute = ServicesCategoryRouteImport.update({
+  id: '/services/$category',
+  path: '/services/$category',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRequestServiceRoute =
+  AuthenticatedRequestServiceRouteImport.update({
+    id: '/request/$service',
+    path: '/request/$service',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -101,6 +114,8 @@ export interface FileRoutesByFullPath {
   '/terms': typeof TermsRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/property/$id': typeof PropertyIdRoute
+  '/services/$category': typeof ServicesCategoryRoute
+  '/request/$service': typeof AuthenticatedRequestServiceRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -115,6 +130,8 @@ export interface FileRoutesByTo {
   '/terms': typeof TermsRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/property/$id': typeof PropertyIdRoute
+  '/services/$category': typeof ServicesCategoryRoute
+  '/request/$service': typeof AuthenticatedRequestServiceRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -131,6 +148,8 @@ export interface FileRoutesById {
   '/terms': typeof TermsRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/property/$id': typeof PropertyIdRoute
+  '/services/$category': typeof ServicesCategoryRoute
+  '/_authenticated/request/$service': typeof AuthenticatedRequestServiceRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -147,6 +166,8 @@ export interface FileRouteTypes {
     | '/terms'
     | '/dashboard'
     | '/property/$id'
+    | '/services/$category'
+    | '/request/$service'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -161,6 +182,8 @@ export interface FileRouteTypes {
     | '/terms'
     | '/dashboard'
     | '/property/$id'
+    | '/services/$category'
+    | '/request/$service'
   id:
     | '__root__'
     | '/'
@@ -176,6 +199,8 @@ export interface FileRouteTypes {
     | '/terms'
     | '/_authenticated/dashboard'
     | '/property/$id'
+    | '/services/$category'
+    | '/_authenticated/request/$service'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -191,6 +216,7 @@ export interface RootRouteChildren {
   PropertiesRoute: typeof PropertiesRoute
   TermsRoute: typeof TermsRoute
   PropertyIdRoute: typeof PropertyIdRoute
+  ServicesCategoryRoute: typeof ServicesCategoryRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -286,15 +312,31 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PropertyIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services/$category': {
+      id: '/services/$category'
+      path: '/services/$category'
+      fullPath: '/services/$category'
+      preLoaderRoute: typeof ServicesCategoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/request/$service': {
+      id: '/_authenticated/request/$service'
+      path: '/request/$service'
+      fullPath: '/request/$service'
+      preLoaderRoute: typeof AuthenticatedRequestServiceRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedRequestServiceRoute: typeof AuthenticatedRequestServiceRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedRequestServiceRoute: AuthenticatedRequestServiceRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
@@ -313,6 +355,7 @@ const rootRouteChildren: RootRouteChildren = {
   PropertiesRoute: PropertiesRoute,
   TermsRoute: TermsRoute,
   PropertyIdRoute: PropertyIdRoute,
+  ServicesCategoryRoute: ServicesCategoryRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
