@@ -7,7 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/use-auth";
 import { useIsAdmin } from "@/hooks/use-is-admin";
 import { getService, inr, requestStatuses, statusLabel } from "@/lib/services";
-import { RequestThread } from "./dashboard";
+import { RequestThread } from "@/components/request-thread";
 
 export const Route = createFileRoute("/_authenticated/admin")({
   head: () => ({ meta: [{ title: "Team panel | ZameenDhan" }, { name: "description", content: "Manage requests, auctions and payments." }, { name: "robots", content: "noindex" }, { property: "og:title", content: "Team panel | ZameenDhan" }, { property: "og:description", content: "Internal team panel." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }] }),
