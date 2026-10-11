@@ -3,6 +3,7 @@ import { Building2, Facebook, Instagram, LayoutDashboard, Linkedin, LogOut, Mail
 import { useState, type ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/use-auth";
+import { useIsAdmin } from "@/hooks/use-is-admin";
 import { supabase } from "@/integrations/supabase/client";
 
 function Brand() {
@@ -12,6 +13,7 @@ function Brand() {
 export function Header() {
   const [open, setOpen] = useState(false);
   const { user } = useAuth();
+  const isAdmin = useIsAdmin();
   const navigate = useNavigate();
   const close = () => setOpen(false);
   const signOut = async () => { await supabase.auth.signOut(); close(); navigate({ to: "/" }); };
@@ -19,12 +21,13 @@ export function Header() {
     <div className="site-nav">
       <Link to="/" onClick={close}><Brand/></Link>
       <nav className={open ? "nav-links nav-open" : "nav-links"} aria-label="Main navigation">
-        <Link to="/properties" search={{ purpose: "Buy" }} onClick={close}>Buy</Link>
-        <Link to="/properties" search={{ purpose: "Rent" }} onClick={close}>Rent</Link>
-        <Link to="/commercial" onClick={close}>Commercial</Link>
-        <Link to="/properties" search={{ purpose: "Buy", type: "Plot" }} onClick={close}>Plots</Link>
+        <Link to="/services/$category" params={{ category: "transaction" }} onClick={close}>Transactions</Link>
+        <Link to="/services/$category" params={{ category: "legal" }} onClick={close}>Legal & Compliance</Link>
+        <Link to="/auctions" onClick={close}>Auctions</Link>
+        <Link to="/properties" search={{ purpose: "Buy" }} onClick={close}>Properties</Link>
         <Link to="/about" onClick={close}>About</Link>
         {user && <Link to="/dashboard" onClick={close}>Dashboard</Link>}
+        {isAdmin && <Link to="/admin" onClick={close}>Team panel</Link>}
       </nav>
       <div className="nav-actions">
         {user
@@ -33,7 +36,7 @@ export function Header() {
               <Button variant="ghost" size="icon" onClick={signOut} aria-label="Sign out"><LogOut size={17}/></Button>
             </>
           : <Button asChild variant="outline" className="login-button"><Link to="/login">Sign in</Link></Button>}
-        <Button asChild className="post-button"><Link to="/post-property">Post property free</Link></Button>
+        <Button asChild className="post-button"><Link to="/services/$category" params={{ category: "transaction" }}>Book a service</Link></Button>
       </div>
       <Button variant="ghost" size="icon" className="menu-toggle" onClick={() => setOpen(!open)} aria-label={open ? "Close menu" : "Open menu"}>{open ? <X/> : <Menu/>}</Button>
     </div>
@@ -44,7 +47,7 @@ export function Footer() {
   return <footer className="site-footer">
     <div className="footer-cta"><div className="content-width"><div><p>LIST YOUR PROPERTY</p><h2>Find the right tenant or buyer, directly.</h2></div><Button asChild variant="secondary"><Link to="/post-property">Post property free</Link></Button></div></div>
     <div className="footer-grid content-width">
-      <div><Brand/><p className="footer-intro">India's owner-first property marketplace for homes, plots and commercial spaces.</p><p><MapPin size={17}/> Bengaluru, Karnataka, India</p><p><Phone size={17}/> 1800 309 2233</p><p><Mail size={17}/> hello@zameendhan.in</p></div>
+      <div><Brand/><p className="footer-intro">Property transaction, legal & compliance and auction services across India.</p><p><MapPin size={17}/> Bengaluru, Karnataka, India</p><p><Phone size={17}/> 1800 309 2233</p><p><Mail size={17}/> hello@zameendhan.in</p></div>
       <div><h3>Explore</h3><Link to="/properties" search={{ purpose: "Buy" }}>Buy a home</Link><Link to="/properties" search={{ purpose: "Rent" }}>Rent a home</Link><Link to="/commercial">Commercial</Link><Link to="/post-property">List property</Link></div>
       <div><h3>Company</h3><Link to="/about">About us</Link><Link to="/contact">Contact</Link><Link to="/privacy">Privacy policy</Link><Link to="/terms">Terms of use</Link></div>
       <div><h3>Property owners</h3><p>Reach genuine buyers and tenants without paying brokerage.</p><Button asChild variant="outline" className="footer-outline"><Link to="/post-property">Start listing</Link></Button></div>

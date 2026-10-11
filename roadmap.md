@@ -7,3 +7,7 @@
 - [x] Post property, listings, detail, favorites, inquiries, dashboard
 - [x] Verify build + browser flows
 - [ ] Publish (waiting on user go-ahead)
+- [x] Pivot to property services platform (transactions, legal, auctions, team panel)
+- [ ] Online payments (waiting on user confirming Paddle)
+- [ ] Real service fees + EMD amounts (waiting on user)
+- [ ] Assign team admin account (waiting on user's email)
