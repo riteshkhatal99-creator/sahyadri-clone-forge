@@ -20,7 +20,10 @@ import { Route as PostPropertyRouteImport } from './routes/post-property'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as PropertiesRouteImport } from './routes/properties'
 import { Route as TermsRouteImport } from './routes/terms'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuctionsIndexRouteImport } from './routes/auctions.index'
+import { Route as AuctionsIdRouteImport } from './routes/auctions.$id'
 import { Route as PropertyIdRouteImport } from './routes/property.$id'
 import { Route as ServicesCategoryRouteImport } from './routes/services.$category'
 import { Route as AuthenticatedRequestServiceRouteImport } from './routes/_authenticated/request.$service'
@@ -79,10 +82,25 @@ const TermsRoute = TermsRouteImport.update({
   path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
   getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuctionsIndexRoute = AuctionsIndexRouteImport.update({
+  id: '/auctions/',
+  path: '/auctions/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuctionsIdRoute = AuctionsIdRouteImport.update({
+  id: '/auctions/$id',
+  path: '/auctions/$id',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const PropertyIdRoute = PropertyIdRouteImport.update({
   id: '/property/$id',
@@ -112,9 +130,12 @@ export interface FileRoutesByFullPath {
   '/privacy': typeof PrivacyRoute
   '/properties': typeof PropertiesRoute
   '/terms': typeof TermsRoute
+  '/admin': typeof AuthenticatedAdminRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/auctions/$id': typeof AuctionsIdRoute
   '/property/$id': typeof PropertyIdRoute
   '/services/$category': typeof ServicesCategoryRoute
+  '/auctions/': typeof AuctionsIndexRoute
   '/request/$service': typeof AuthenticatedRequestServiceRoute
 }
 export interface FileRoutesByTo {
@@ -128,9 +149,12 @@ export interface FileRoutesByTo {
   '/privacy': typeof PrivacyRoute
   '/properties': typeof PropertiesRoute
   '/terms': typeof TermsRoute
+  '/admin': typeof AuthenticatedAdminRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/auctions/$id': typeof AuctionsIdRoute
   '/property/$id': typeof PropertyIdRoute
   '/services/$category': typeof ServicesCategoryRoute
+  '/auctions': typeof AuctionsIndexRoute
   '/request/$service': typeof AuthenticatedRequestServiceRoute
 }
 export interface FileRoutesById {
@@ -146,9 +170,12 @@ export interface FileRoutesById {
   '/privacy': typeof PrivacyRoute
   '/properties': typeof PropertiesRoute
   '/terms': typeof TermsRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/auctions/$id': typeof AuctionsIdRoute
   '/property/$id': typeof PropertyIdRoute
   '/services/$category': typeof ServicesCategoryRoute
+  '/auctions/': typeof AuctionsIndexRoute
   '/_authenticated/request/$service': typeof AuthenticatedRequestServiceRoute
 }
 export interface FileRouteTypes {
@@ -164,9 +191,12 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/properties'
     | '/terms'
+    | '/admin'
     | '/dashboard'
+    | '/auctions/$id'
     | '/property/$id'
     | '/services/$category'
+    | '/auctions/'
     | '/request/$service'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -180,9 +210,12 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/properties'
     | '/terms'
+    | '/admin'
     | '/dashboard'
+    | '/auctions/$id'
     | '/property/$id'
     | '/services/$category'
+    | '/auctions'
     | '/request/$service'
   id:
     | '__root__'
@@ -197,9 +230,12 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/properties'
     | '/terms'
+    | '/_authenticated/admin'
     | '/_authenticated/dashboard'
+    | '/auctions/$id'
     | '/property/$id'
     | '/services/$category'
+    | '/auctions/'
     | '/_authenticated/request/$service'
   fileRoutesById: FileRoutesById
 }
@@ -215,8 +251,10 @@ export interface RootRouteChildren {
   PrivacyRoute: typeof PrivacyRoute
   PropertiesRoute: typeof PropertiesRoute
   TermsRoute: typeof TermsRoute
+  AuctionsIdRoute: typeof AuctionsIdRoute
   PropertyIdRoute: typeof PropertyIdRoute
   ServicesCategoryRoute: typeof ServicesCategoryRoute
+  AuctionsIndexRoute: typeof AuctionsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -298,12 +336,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/dashboard': {
       id: '/_authenticated/dashboard'
       path: '/dashboard'
       fullPath: '/dashboard'
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/auctions/': {
+      id: '/auctions/'
+      path: '/auctions'
+      fullPath: '/auctions/'
+      preLoaderRoute: typeof AuctionsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auctions/$id': {
+      id: '/auctions/$id'
+      path: '/auctions/$id'
+      fullPath: '/auctions/$id'
+      preLoaderRoute: typeof AuctionsIdRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/property/$id': {
       id: '/property/$id'
@@ -330,11 +389,13 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedRequestServiceRoute: typeof AuthenticatedRequestServiceRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminRoute: AuthenticatedAdminRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedRequestServiceRoute: AuthenticatedRequestServiceRoute,
 }
@@ -354,8 +415,10 @@ const rootRouteChildren: RootRouteChildren = {
   PrivacyRoute: PrivacyRoute,
   PropertiesRoute: PropertiesRoute,
   TermsRoute: TermsRoute,
+  AuctionsIdRoute: AuctionsIdRoute,
   PropertyIdRoute: PropertyIdRoute,
   ServicesCategoryRoute: ServicesCategoryRoute,
+  AuctionsIndexRoute: AuctionsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

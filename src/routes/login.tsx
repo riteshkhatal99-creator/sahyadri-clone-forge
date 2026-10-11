@@ -39,9 +39,10 @@ function LoginPage() {
     try {
       if (mode === "signup") {
         const fullName = String(form.get("name") ?? "");
+        const accountType = String(form.get("account_type") ?? "owner");
         const { data, error: err } = await supabase.auth.signUp({
           email, password,
-          options: { data: { full_name: fullName }, emailRedirectTo: window.location.origin },
+          options: { data: { full_name: fullName, account_type: accountType }, emailRedirectTo: window.location.origin },
         });
         if (err) throw err;
         if (data.session) { navigate({ to: "/dashboard" }); return; }
@@ -69,7 +70,7 @@ function LoginPage() {
     <div className="auth-card">
       <p className="eyebrow">{mode === "signin" ? "WELCOME BACK" : "JOIN ZAMEENDHAN"}</p>
       <h1>{mode === "signin" ? "Sign in to your account" : "Create your free account"}</h1>
-      <p className="auth-sub">Save homes, contact owners and manage your listings.</p>
+      <p className="auth-sub">Book services, track requests and bid in auctions.</p>
 
       <Button type="button" variant="outline" size="lg" className="auth-google" onClick={google}>
         <Chrome size={18}/> Continue with Google
@@ -78,6 +79,7 @@ function LoginPage() {
 
       <form onSubmit={submit} className="auth-form">
         {mode === "signup" && <label>Full name<input name="name" required placeholder="Your full name" autoComplete="name"/></label>}
+        {mode === "signup" && <label>I am a<select name="account_type" defaultValue="owner"><option value="owner">Property owner / buyer</option><option value="builder">Builder / developer</option></select></label>}
         <label>Email<input name="email" type="email" required placeholder="you@example.com" autoComplete="email"/></label>
         <label>Password<input name="password" type="password" required minLength={6} placeholder="At least 6 characters" autoComplete={mode === "signin" ? "current-password" : "new-password"}/></label>
         {error && <p className="auth-error" role="alert">{error}</p>}
