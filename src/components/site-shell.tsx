@@ -26,13 +26,13 @@ export function Header() {
         <Link to="/auctions" onClick={close}>Auctions</Link>
         <Link to="/properties" search={{ purpose: "Buy" }} onClick={close}>Properties</Link>
         <Link to="/about" onClick={close}>About</Link>
-        {user && <Link to="/dashboard" onClick={close}>Dashboard</Link>}
+        {user && <Link to="/dashboard" onClick={close}>My requests</Link>}
         {isAdmin && <Link to="/admin" onClick={close}>Team panel</Link>}
       </nav>
       <div className="nav-actions">
         {user
           ? <>
-              <Button asChild variant="outline" className="login-button"><Link to="/dashboard"><LayoutDashboard size={16}/>Dashboard</Link></Button>
+              <Button asChild variant="outline" className="login-button"><Link to="/dashboard"><LayoutDashboard size={16}/>My requests</Link></Button>
               <Button variant="ghost" size="icon" onClick={signOut} aria-label="Sign out"><LogOut size={17}/></Button>
             </>
           : <Button asChild variant="outline" className="login-button"><Link to="/login">Sign in</Link></Button>}
@@ -45,12 +45,12 @@ export function Header() {
 
 export function Footer() {
   return <footer className="site-footer">
-    <div className="footer-cta"><div className="content-width"><div><p>LIST YOUR PROPERTY</p><h2>Find the right tenant or buyer, directly.</h2></div><Button asChild variant="secondary"><Link to="/post-property">Post property free</Link></Button></div></div>
+    <div className="footer-cta"><div className="content-width"><div><p>YOUR NEXT PROPERTY STEP</p><h2>Find the right service for your property.</h2></div><Button asChild variant="secondary"><Link to="/services/$category" params={{ category: "transaction" }}>Explore services</Link></Button></div></div>
     <div className="footer-grid content-width">
       <div><Brand/><p className="footer-intro">Property transaction, legal & compliance and auction services across India.</p><p><MapPin size={17}/> Bengaluru, Karnataka, India</p><p><Phone size={17}/> 1800 309 2233</p><p><Mail size={17}/> hello@zameendhan.in</p></div>
-      <div><h3>Explore</h3><Link to="/properties" search={{ purpose: "Buy" }}>Buy a home</Link><Link to="/properties" search={{ purpose: "Rent" }}>Rent a home</Link><Link to="/commercial">Commercial</Link><Link to="/post-property">List property</Link></div>
+      <div><h3>Services</h3><Link to="/services/$category" params={{ category: "transaction" }}>Transaction services</Link><Link to="/services/$category" params={{ category: "legal" }}>Legal & compliance</Link><Link to="/auctions">Property auctions</Link><Link to="/properties" search={{ purpose: "Buy" }}>Browse properties</Link></div>
       <div><h3>Company</h3><Link to="/about">About us</Link><Link to="/contact">Contact</Link><Link to="/privacy">Privacy policy</Link><Link to="/terms">Terms of use</Link></div>
-      <div><h3>Property owners</h3><p>Reach genuine buyers and tenants without paying brokerage.</p><Button asChild variant="outline" className="footer-outline"><Link to="/post-property">Start listing</Link></Button></div>
+      <div><h3>Your account</h3><p>Keep your requests, shared documents and team conversations together.</p><Button asChild variant="outline" className="footer-outline"><Link to="/dashboard">My requests</Link></Button></div>
     </div>
     <div className="footer-bottom content-width"><span>© 2026 ZameenDhan. All rights reserved.</span><span>Made for India's property seekers</span><div className="socials"><Facebook/><Instagram/><Youtube/><Linkedin/></div></div>
   </footer>;
