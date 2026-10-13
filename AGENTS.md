@@ -11,3 +11,4 @@
 
 ## Theme architecture
 - Keep shared colors and typography in global semantic CSS tokens, with web fonts loaded by the root route; this keeps every marketplace page visually consistent.
+- Keep service preparation guidance and FAQs in a browser-safe shared module, separate from pricing and bidding rules, so informational changes cannot alter transaction logic.
