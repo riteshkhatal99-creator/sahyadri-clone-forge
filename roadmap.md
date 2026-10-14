@@ -1,7 +1,7 @@
 # ZameenDhan — Launch Roadmap
 
-- [ ] Improve service information, navigation and auction participation guidance; verify public flows
-- [ ] Compare auction readiness with iQuippo and clearly disclose unconnected capabilities
+- [x] Improve service information, navigation and auction participation guidance; verify public flows
+- [x] Review iQuippo public information, audit our auctions and disclose missing payment, verification and settlement capabilities (iQuippo's auction page exposed no readable details)
 
 - [x] Frontend: home, listings, detail, post property, commercial, info pages
 - [x] Lovable Cloud backend enabled
