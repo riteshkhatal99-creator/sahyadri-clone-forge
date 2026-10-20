@@ -14,3 +14,7 @@
 - [ ] Online payments (waiting on user confirming Paddle)
 - [ ] Real service fees + EMD amounts (waiting on user)
 - [ ] Assign team admin account (waiting on user's email)
+- [ ] Replace placeholder service prices with blank/unset fees; keep checkout disabled until real fees are supplied
+- [ ] Configure auction EMD separately per auction from its published terms; do not invent a universal iQuippo amount
+- [ ] Prepare Razorpay integration after confirming its approval and receiving credentials
+- [ ] Grant team access to riteshkhatal99@gmail.com after that account exists
