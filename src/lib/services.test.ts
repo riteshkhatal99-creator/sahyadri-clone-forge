@@ -1,6 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { extendedEnd, minNextBid, validateBid, type AuctionState } from "./services";
-import { services } from "./services";
+import { extendedEnd, minNextBid, services, validateBid, type AuctionState } from "./services";
 
 const base: AuctionState = { reserve_price: 5000000, bid_step: 50000, current_price: 0, bid_count: 0, starts_at: "2026-10-01T10:00:00Z", ends_at: "2026-10-01T12:00:00Z", extension_minutes: 5 };
 const during = new Date("2026-10-01T11:00:00Z");
