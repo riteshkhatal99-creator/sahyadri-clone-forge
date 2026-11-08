@@ -11,7 +11,7 @@
 - [x] Verify build + browser flows
 - [ ] Publish (waiting on user go-ahead)
 - [x] Pivot to property services platform (transactions, legal, auctions, team panel)
-- [ ] Razorpay payments (secure connection was declined; waiting for user direction; business approval is unconfirmed)
+- [ ] Dodo Payments setup (new user preference; check eligibility and confirm before enabling)
 - [ ] Service fees (user asked to leave blank until prices are supplied)
 - [ ] Assign team admin access (waiting for riteshkhatal99@gmail.com to sign up)
 - [ ] Replace placeholder service prices with blank/unset fees; keep checkout disabled until real fees are supplied
