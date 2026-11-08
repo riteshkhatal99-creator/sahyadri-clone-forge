@@ -2,7 +2,7 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { FormEvent, useState } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import { fieldsByCategory, getService, inr } from "@/lib/services";
+import { fieldsByCategory, getService } from "@/lib/services";
 import { useAuth } from "@/hooks/use-auth";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -31,10 +31,9 @@ function RequestPage() {
     fields.forEach((f) => { details[f.name] = String(form.get(f.name) ?? ""); });
     details["notes"] = String(form.get("notes") ?? "");
     const { data, error } = await supabase.from("service_requests").insert({
-      user_id: user.id, service_slug: service.slug, category: service.category, details, fee: service.fee,
+      user_id: user.id, service_slug: service.slug, category: service.category, details,
     }).select("id, ref_no").single();
     if (error || !data) { setBusy(false); toast.error("Could not submit your request. Please try again."); return; }
-    await supabase.from("payments").insert({ user_id: user.id, kind: "service_fee", ref_id: data.id, amount: service.fee });
     const file = form.get("file");
     if (file instanceof File && file.size > 0) {
       const path = `${data.id}/${Date.now()}-${file.name.replace(/[^\w.-]/g, "_")}`;
@@ -55,7 +54,7 @@ function RequestPage() {
       </label>)}
       {service.category === "legal" && <label>Supporting document (optional)<input name="file" type="file" accept=".pdf,.jpg,.jpeg,.png"/></label>}
       <label>Anything else we should know?<textarea name="notes" rows={3}/></label>
-      <div className="request-total"><span>Service fee</span><strong>{inr(service.fee)}</strong></div>
+      <div className="request-total"><span>Service fee</span><strong>Confirmed after review</strong></div>
       <Button type="submit" size="lg" disabled={busy}>{busy ? "Submitting..." : "Submit request"}</Button>
     </form>
   </section>;

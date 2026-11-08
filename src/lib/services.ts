@@ -1,16 +1,15 @@
 export type FieldDef = { name: string; label: string; type: "text" | "number" | "select" | "textarea"; options?: string[]; placeholder?: string; required?: boolean };
 export type Category = "transaction" | "legal";
-export type Service = { slug: string; category: Category; name: string; summary: string; fee: number };
+export type Service = { slug: string; category: Category; name: string; summary: string; fee: number | null };
 
-// PLACEHOLDER PRICES — replace with real fees from the business owner.
 export const services: Service[] = [
-  { slug: "buying", category: "transaction", name: "Buying assistance", summary: "We shortlist, inspect and negotiate the right property for you.", fee: 4999 },
-  { slug: "selling", category: "transaction", name: "Selling", summary: "Pricing, marketing and buyer handling until the deal closes.", fee: 4999 },
-  { slug: "leasing", category: "transaction", name: "Leasing", summary: "Find verified tenants or the right lease for your space.", fee: 2999 },
-  { slug: "resale", category: "transaction", name: "Resale", summary: "End-to-end support for resale homes and transfer paperwork.", fee: 4999 },
-  { slug: "title-verification", category: "legal", name: "Title verification", summary: "Lawyer-checked chain of title and encumbrance search.", fee: 7999 },
-  { slug: "agreement-drafting", category: "legal", name: "Agreement drafting", summary: "Sale, lease and leave & licence agreements drafted and reviewed.", fee: 3999 },
-  { slug: "rera-registration", category: "legal", name: "RERA registration", summary: "Project and agent registration with your state RERA authority.", fee: 14999 },
+  { slug: "buying", category: "transaction", name: "Buying assistance", summary: "We shortlist, inspect and negotiate the right property for you.", fee: null },
+  { slug: "selling", category: "transaction", name: "Selling", summary: "Pricing, marketing and buyer handling until the deal closes.", fee: null },
+  { slug: "leasing", category: "transaction", name: "Leasing", summary: "Find verified tenants or the right lease for your space.", fee: null },
+  { slug: "resale", category: "transaction", name: "Resale", summary: "End-to-end support for resale homes and transfer paperwork.", fee: null },
+  { slug: "title-verification", category: "legal", name: "Title verification", summary: "Lawyer-checked chain of title and encumbrance search.", fee: null },
+  { slug: "agreement-drafting", category: "legal", name: "Agreement drafting", summary: "Sale, lease and leave & licence agreements drafted and reviewed.", fee: null },
+  { slug: "rera-registration", category: "legal", name: "RERA registration", summary: "Project and agent registration with your state RERA authority.", fee: null },
 ];
 
 export const categoryInfo: Record<Category, { title: string; eyebrow: string; description: string }> = {

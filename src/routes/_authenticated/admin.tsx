@@ -32,7 +32,7 @@ function Requests() {
   const update = async (id: string, patch: { status?: string; paid?: boolean }) => { await supabase.from("service_requests").update(patch).eq("id", id); qc.invalidateQueries({ queryKey: ["admin-requests"] }); };
   if (!data.length) return <div className="empty-state"><h2>No requests yet</h2></div>;
   return <div className="dashboard-list">{data.map((r) => <div key={r.id} className="dashboard-row request-row">
-    <div className="request-top"><div><h3>#{r.ref_no} · {getService(r.service_slug)?.name}</h3><p>{inr(r.fee)} · {r.paid ? "Paid" : "Unpaid"} · {new Date(r.created_at).toLocaleDateString("en-IN")}</p>
+    <div className="request-top"><div><h3>#{r.ref_no} · {getService(r.service_slug)?.name}</h3><p>{r.fee > 0 ? `${inr(r.fee)} · ` : "Fee to be confirmed · "}{r.paid ? "Paid" : "Unpaid"} · {new Date(r.created_at).toLocaleDateString("en-IN")}</p>
       <p className="details">{Object.entries(r.details as Record<string, string>).filter(([, v]) => v).map(([k, v]) => `${k.replace(/_/g, " ")}: ${v}`).join(" · ")}</p></div>
       <div className="dashboard-actions"><select value={r.status} onChange={(e) => update(r.id, { status: e.target.value })}>{[...requestStatuses, "cancelled"].map((s) => <option key={s} value={s}>{statusLabel[s]}</option>)}</select>
         {!r.paid && <Button size="sm" onClick={() => update(r.id, { paid: true, status: r.status === "awaiting_payment" ? "submitted" : r.status })}>Mark paid</Button>}

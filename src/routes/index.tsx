@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, CheckCircle2, FileCheck2, Gavel, Handshake, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { categoryInfo, inr, services } from "@/lib/services";
+import { categoryInfo, services } from "@/lib/services";
 import heroImage from "@/assets/property-hero.jpg";
 
 export const Route = createFileRoute("/")({
@@ -36,8 +36,8 @@ function HomePage() {
         {(["transaction", "legal"] as const).map((cat) => <Link key={cat} to="/services/$category" params={{ category: cat }} className="service-group">
           {cat === "transaction" ? <Handshake/> : <FileCheck2/>}
           <p className="eyebrow">{categoryInfo[cat].eyebrow}</p><h3>{categoryInfo[cat].title}</h3><p>{categoryInfo[cat].description}</p>
-          <ul>{services.filter((s) => s.category === cat).map((s) => <li key={s.slug}>{s.name}<span>{inr(s.fee)}*</span></li>)}</ul>
-          <small>*Indicative fees, not final pricing.</small>
+          <ul>{services.filter((s) => s.category === cat).map((s) => <li key={s.slug}>{s.name}</li>)}</ul>
+          <small>Fees confirmed after reviewing your request.</small>
           <b>Explore <ArrowRight size={16}/></b>
         </Link>)}
         <Link to="/auctions" className="service-group">
