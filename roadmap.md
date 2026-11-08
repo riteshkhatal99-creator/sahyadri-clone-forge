@@ -11,9 +11,9 @@
 - [x] Verify build + browser flows
 - [ ] Publish (waiting on user go-ahead)
 - [x] Pivot to property services platform (transactions, legal, auctions, team panel)
-- [ ] Online payments (waiting on user confirming Paddle)
-- [ ] Real service fees + EMD amounts (waiting on user)
-- [ ] Assign team admin account (waiting on user's email)
+- [ ] Razorpay payments (waiting on account approval and API credentials)
+- [ ] Service fees (user asked to leave blank until prices are supplied)
+- [ ] Assign team admin access (waiting for riteshkhatal99@gmail.com to sign up)
 - [ ] Replace placeholder service prices with blank/unset fees; keep checkout disabled until real fees are supplied
 - [ ] Configure auction EMD separately per auction from its published terms; do not invent a universal iQuippo amount
 - [ ] Prepare Razorpay integration after confirming its approval and receiving credentials

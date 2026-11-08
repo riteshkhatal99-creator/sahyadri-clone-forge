@@ -31,7 +31,7 @@ function RequestPage() {
     fields.forEach((f) => { details[f.name] = String(form.get(f.name) ?? ""); });
     details["notes"] = String(form.get("notes") ?? "");
     const { data, error } = await supabase.from("service_requests").insert({
-      user_id: user.id, service_slug: service.slug, category: service.category, details,
+      user_id: user.id, service_slug: service.slug, category: service.category, details, status: "submitted",
     }).select("id, ref_no").single();
     if (error || !data) { setBusy(false); toast.error("Could not submit your request. Please try again."); return; }
     const file = form.get("file");
