@@ -43,7 +43,7 @@ function HomePage() {
         <Link to="/auctions" className="service-group">
           <Gavel/><p className="eyebrow">EXPLORE · REGISTER · BID</p><h3>Property auctions</h3><p>Review scheduled properties, reserve prices and bidding windows. Registration requires a team-confirmed deposit before bidding.</p>
           <ul><li>Reserve price & bid history</li><li>Minimum bid increments</li><li>Late-bid timer extensions</li></ul>
-          <small>Deposit payments and refunds are not automated.</small>
+          <small>EMD is set per auction; deposit payments and refunds are not automated.</small>
           <b>See auctions <ArrowRight size={16}/></b>
         </Link>
       </div>
