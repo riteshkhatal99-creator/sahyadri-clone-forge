@@ -32,7 +32,7 @@ function DashboardPage() {
     </div>
     {tab === "requests" && (requests.length ? <div className="dashboard-list">{requests.map((r) => {
       const step = requestStatuses.indexOf(r.status as typeof requestStatuses[number]);
-      return <div key={r.id} className="dashboard-row request-row"><div className="request-top"><div><h3>#{r.ref_no} · {getService(r.service_slug)?.name ?? r.service_slug}</h3><p>{inr(r.fee)} · {r.paid ? "Paid" : "Payment pending — our team will share a payment link"}</p></div><Button variant="outline" size="sm" onClick={() => setOpen(open === r.id ? null : r.id)}>{open === r.id ? "Hide" : "Messages"}</Button></div>
+      return <div key={r.id} className="dashboard-row request-row"><div className="request-top"><div><h3>#{r.ref_no} · {getService(r.service_slug)?.name ?? r.service_slug}</h3><p>{r.paid ? "Paid" : "Fee to be confirmed — no payment taken"}</p></div><Button variant="outline" size="sm" onClick={() => setOpen(open === r.id ? null : r.id)}>{open === r.id ? "Hide" : "Messages"}</Button></div>
         <ol className="timeline">{requestStatuses.map((s, i) => <li key={s} className={i <= step ? "done" : ""}>{statusLabel[s]}</li>)}</ol>
         {open === r.id && <RequestThread requestId={r.id} asTeam={false}/>}</div>; })}</div>
       : <div className="empty-state"><h2>No requests yet</h2><p>Book your first property service.</p><Link to="/services/$category" params={{ category: "transaction" }}>Browse services</Link></div>)}

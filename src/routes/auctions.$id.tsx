@@ -70,7 +70,7 @@ function AuctionPage() {
       <span className={`phase phase-${phase}`}>{phase}</span>
       <h1>{a.title}</h1><p className="lead">{a.locality}{a.locality && ", "}{a.city} · {a.property_type}{a.carpet_area ? ` · ${a.carpet_area.toLocaleString("en-IN")} sq.ft. carpet` : ""}</p>
       <p>{a.description}</p>
-      <div className="service-notice"><strong>Before you bid</strong><p>Obtain the property records, inspection details and written auction terms from the organiser. Online deposit collection, automated refunds and ownership transfer are not connected.</p></div>
+      <div className="service-notice"><strong>Before you bid</strong><p>Obtain the property records, inspection details and written auction terms from the organiser. EMD and refund conditions are specific to each auction. Online deposit collection, automated refunds and ownership transfer are not connected.</p></div>
       <h2>Bid history</h2>
       {bids.length === 0 ? <p>No bids yet.</p> : <ul className="bid-list">{bids.map((b) => <li key={b.id}><strong>{inr(b.amount)}</strong><span>{b.user_id === user?.id ? "You" : `Bidder ${b.user_id.slice(0, 4).toUpperCase()}`}</span><small>{new Date(b.created_at).toLocaleTimeString("en-IN")}</small></li>)}</ul>}
       <ServiceFaq items={auctionQuestions}/>

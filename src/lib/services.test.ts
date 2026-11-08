@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { extendedEnd, minNextBid, validateBid, type AuctionState } from "./services";
+import { services } from "./services";
 
 const base: AuctionState = { reserve_price: 5000000, bid_step: 50000, current_price: 0, bid_count: 0, starts_at: "2026-10-01T10:00:00Z", ends_at: "2026-10-01T12:00:00Z", extension_minutes: 5 };
 const during = new Date("2026-10-01T11:00:00Z");
@@ -26,5 +27,11 @@ describe("auction bidding rules", () => {
     const now = new Date("2026-10-01T11:58:00Z");
     expect(extendedEnd(base, now).toISOString()).toBe("2026-10-01T12:03:00.000Z");
     expect(extendedEnd(base, during).toISOString()).toBe("2026-10-01T12:00:00.000Z");
+  });
+});
+
+describe("service pricing", () => {
+  it("does not publish invented fees before the business supplies real prices", () => {
+    expect(services.map((service) => service.fee)).toEqual([null, null, null, null, null, null, null]);
   });
 });
