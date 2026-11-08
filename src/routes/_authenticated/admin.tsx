@@ -32,7 +32,7 @@ function Requests() {
   const update = async (id: string, patch: { status?: string; paid?: boolean }) => { await supabase.from("service_requests").update(patch).eq("id", id); qc.invalidateQueries({ queryKey: ["admin-requests"] }); };
   if (!data.length) return <div className="empty-state"><h2>No requests yet</h2></div>;
   return <div className="dashboard-list">{data.map((r) => <div key={r.id} className="dashboard-row request-row">
-    <div className="request-top"><div><h3>#{r.ref_no} · {getService(r.service_slug)?.name}</h3><p>{r.fee > 0 ? `${inr(r.fee)} · ` : "Fee to be confirmed · "}{r.paid ? "Paid" : "Unpaid"} · {new Date(r.created_at).toLocaleDateString("en-IN")}</p>
+    <div className="request-top"><div><h3>#{r.ref_no} · {getService(r.service_slug)?.name}</h3><p>Fee to be confirmed · {r.paid ? "Paid" : "Unpaid"} · {new Date(r.created_at).toLocaleDateString("en-IN")}</p>
       <p className="details">{Object.entries(r.details as Record<string, string>).filter(([, v]) => v).map(([k, v]) => `${k.replace(/_/g, " ")}: ${v}`).join(" · ")}</p></div>
       <div className="dashboard-actions"><select value={r.status} onChange={(e) => update(r.id, { status: e.target.value })}>{[...requestStatuses, "cancelled"].map((s) => <option key={s} value={s}>{statusLabel[s]}</option>)}</select>
         {!r.paid && <Button size="sm" onClick={() => update(r.id, { paid: true, status: r.status === "awaiting_payment" ? "submitted" : r.status })}>Mark paid</Button>}
@@ -69,7 +69,7 @@ function Auctions() {
       <label>Title<input name="title" required/></label><label>City<input name="city" required/></label><label>Locality<input name="locality"/></label>
       <label>Property type<select name="type">{["Apartment", "Villa", "Plot", "Office", "Shop", "Warehouse"].map((t) => <option key={t}>{t}</option>)}</select></label>
       <label>Carpet area (sq.ft.)<input name="area" type="number" min={0} defaultValue={0}/></label>
-      <label>Reserve price (₹)<input name="reserve" type="number" min={1} required/></label><label>Bid step (₹)<input name="step" type="number" min={1} defaultValue={50000} required/></label><label>EMD (₹)<input name="emd" type="number" min={0} required/></label>
+      <label>Reserve price (₹)<input name="reserve" type="number" min={1} required/></label><label>Bid step (₹)<input name="step" type="number" min={1} defaultValue={50000} required/></label><label>EMD for this auction (₹)<input name="emd" type="number" min={1} required/><small>Set this per auction using its published terms; there is no single iQuippo-wide amount.</small></label>
       <label>Starts<input name="starts" type="datetime-local" required/></label><label>Ends<input name="ends" type="datetime-local" required/></label>
       <label>Description<textarea name="description" rows={3}/></label><label>Photo<input name="photo" type="file" accept="image/*"/></label>
       <Button type="submit" disabled={busy}>Create auction</Button>
