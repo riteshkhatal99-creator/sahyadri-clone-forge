@@ -35,7 +35,6 @@ function Requests() {
     <div className="request-top"><div><h3>#{r.ref_no} · {getService(r.service_slug)?.name}</h3><p>Fee to be confirmed · {r.paid ? "Paid" : "Unpaid"} · {new Date(r.created_at).toLocaleDateString("en-IN")}</p>
       <p className="details">{Object.entries(r.details as Record<string, string>).filter(([, v]) => v).map(([k, v]) => `${k.replace(/_/g, " ")}: ${v}`).join(" · ")}</p></div>
       <div className="dashboard-actions"><select value={r.status} onChange={(e) => update(r.id, { status: e.target.value })}>{[...requestStatuses, "cancelled"].map((s) => <option key={s} value={s}>{statusLabel[s]}</option>)}</select>
-        {!r.paid && <Button size="sm" onClick={() => update(r.id, { paid: true, status: r.status === "awaiting_payment" ? "submitted" : r.status })}>Mark paid</Button>}
         <Button size="sm" variant="outline" onClick={() => setOpen(open === r.id ? null : r.id)}>Thread</Button></div></div>
     {open === r.id && <RequestThread requestId={r.id} asTeam/>}
   </div>)}</div>;

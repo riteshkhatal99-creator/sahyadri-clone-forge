@@ -49,8 +49,7 @@ function AuctionPage() {
     if (!user) return;
     const { error } = await supabase.from("auction_registrations").insert({ auction_id: id, user_id: user.id });
     if (error) { toast.error("Could not register"); return; }
-    await supabase.from("payments").insert({ user_id: user.id, kind: "emd", ref_id: id, amount: a.emd_amount });
-    toast.success("Registered. Our team will confirm your EMD payment.");
+    toast.success("Interest registered. This does not collect an EMD.");
     qc.invalidateQueries({ queryKey: ["reg", id] });
   };
   const bid = async () => {
