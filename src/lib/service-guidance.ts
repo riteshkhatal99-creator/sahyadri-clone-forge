@@ -10,7 +10,7 @@ export const serviceGuidance: Record<string, { forWhom: string; scope: string[];
 
 export const serviceQuestions = [
   { question: "What happens after I submit a request?", answer: "Your request appears in My requests. You can follow its status, exchange messages with the team and access documents shared against that request." },
-  { question: "Are the displayed prices final?", answer: "No. Displayed fees are indicative placeholders, not confirmed business pricing. Confirm the scope and final fee with the team before making any payment. Online checkout is not connected yet." },
+  { question: "How much does a service cost?", answer: "Service fees have not been set yet. The team will confirm the work scope and fee with you before you decide to proceed. No online payment is taken when you submit a request." },
   { question: "What documents should I prepare?", answer: "Start with the details listed for your chosen service. Legal requests allow an optional supporting document upload. The team may request further records through your request thread." },
   { question: "How long will my request take?", answer: "No fixed completion time is currently published. Timing depends on the agreed scope, document availability and, where applicable, the relevant government authority." },
   { question: "Does a request guarantee a sale or legal approval?", answer: "No. A service request is a request for assistance. A sale depends on the parties, and registration or regulatory approval depends on the competent authority." },
