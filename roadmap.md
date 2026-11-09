@@ -11,10 +11,9 @@
 - [x] Verify build + browser flows
 - [ ] Publish (waiting on user go-ahead)
 - [x] Pivot to property services platform (transactions, legal, auctions, team panel)
-- [ ] Dodo Payments setup (likely outside its digital-product focus; written approval needed for real-estate services and refundable auction deposits)
+- [ ] Select a compatible payment provider (Dodo's published policy excludes planned human-delivered, legal/registration and refundable-deposit flows; business country is needed to assess alternatives)
 - [ ] Service fees (user asked to leave blank until prices are supplied)
-- [ ] Assign team admin access (waiting for riteshkhatal99@gmail.com to sign up)
+- [ ] Assign team admin access (no matching account found for riteshkhatal99@gmail.com yet)
 - [x] Remove placeholder service prices from customer screens; keep service requests free to submit until fees are supplied
 - [x] Set auction EMD separately per auction from its published terms; do not invent a universal iQuippo amount
 - [x] Remove fake payment records when users register auction interest; no money is collected yet
-- [ ] Grant team access to riteshkhatal99@gmail.com after that account exists
