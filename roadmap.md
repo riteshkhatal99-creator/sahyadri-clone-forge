@@ -11,7 +11,7 @@
 - [x] Verify build + browser flows
 - [ ] Publish (waiting on user go-ahead)
 - [x] Pivot to property services platform (transactions, legal, auctions, team panel)
-- [ ] Select a compatible payment provider (Dodo's published policy excludes planned human-delivered, legal/registration and refundable-deposit flows; business country is needed to assess alternatives)
+- [ ] Select a compatible payment provider (business registered in India; Lovable's built-in options are unavailable for this product/region, and Dodo's published policy excludes planned human-delivered, legal/registration and refundable-deposit flows; user decision needed on custom Razorpay integration or leaving payments offline)
 - [ ] Service fees (user asked to leave blank until prices are supplied)
 - [ ] Assign team admin access (no matching account found for riteshkhatal99@gmail.com yet)
 - [x] Remove placeholder service prices from customer screens; keep service requests free to submit until fees are supplied
