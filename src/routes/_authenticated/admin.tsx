@@ -10,14 +10,14 @@ import { getService, inr, requestStatuses, statusLabel } from "@/lib/services";
 import { RequestThread } from "@/components/request-thread";
 
 export const Route = createFileRoute("/_authenticated/admin")({
-  head: () => ({ meta: [{ title: "Team panel | ZameenDhan" }, { name: "description", content: "Manage requests, auctions and payments." }, { name: "robots", content: "noindex" }, { property: "og:title", content: "Team panel | ZameenDhan" }, { property: "og:description", content: "Internal team panel." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }] }),
+  head: () => ({ meta: [{ title: "Team panel | Property24" }, { name: "description", content: "Manage requests, auctions and payments." }, { name: "robots", content: "noindex" }, { property: "og:title", content: "Team panel | Property24" }, { property: "og:description", content: "Internal team panel." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }] }),
   component: AdminPage,
 });
 
 function AdminPage() {
   const isAdmin = useIsAdmin();
   const [tab, setTab] = useState<"requests" | "auctions" | "payments">("requests");
-  if (!isAdmin) return <section className="content-width empty-state"><h2>Team access only</h2><p>This area is for ZameenDhan staff.</p></section>;
+  if (!isAdmin) return <section className="content-width empty-state"><h2>Team access only</h2><p>This area is for Property24 staff.</p></section>;
   return <section className="dashboard-page content-width">
     <div className="dashboard-head"><div><p className="eyebrow">TEAM PANEL</p><h1>Operations</h1></div></div>
     <div className="dashboard-tabs">{(["requests", "auctions", "payments"] as const).map((t) => <Button key={t} variant={tab === t ? "default" : "outline"} onClick={() => setTab(t)}>{t[0]!.toUpperCase() + t.slice(1)}</Button>)}</div>

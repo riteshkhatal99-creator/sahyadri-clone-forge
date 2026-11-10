@@ -1,8 +1,8 @@
-# Sahyadri Farms Replica
+# Property24
 
-https://www.sahyadrifarms.com/
+Property-focused services and marketplace for buying, selling, leasing, property legal and compliance requests, and auctions.
 
-i want 100% copy of this website everything place to place full matching
+This project was built with [Lovable](https://lovable.dev).
 
 This project was built with [Lovable](https://lovable.dev).
 

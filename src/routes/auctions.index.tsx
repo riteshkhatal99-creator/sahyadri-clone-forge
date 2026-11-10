@@ -10,9 +10,9 @@ import { auctionPhase, inr } from "@/lib/services";
 
 export const Route = createFileRoute("/auctions/")({
   head: () => ({ meta: [
-    { title: "Live Property Auctions | ZameenDhan" },
-    { name: "description", content: "Explore property auctions, reserve prices, bidding windows and deposit requirements on ZameenDhan." },
-    { property: "og:title", content: "Live Property Auctions | ZameenDhan" },
+    { title: "Live Property Auctions | Property24" },
+    { name: "description", content: "Explore property auctions, reserve prices, bidding windows and deposit requirements on Property24." },
+    { property: "og:title", content: "Live Property Auctions | Property24" },
     { property: "og:description", content: "Review property auction details and participation requirements before bidding." },
     { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" },
   ]}),

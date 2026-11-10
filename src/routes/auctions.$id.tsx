@@ -11,8 +11,8 @@ import { auctionQuestions } from "@/lib/service-guidance";
 
 export const Route = createFileRoute("/auctions/$id")({
   head: () => ({ meta: [
-    { title: "Auction details | ZameenDhan" }, { name: "description", content: "Live property auction with real-time bidding on ZameenDhan." },
-    { property: "og:title", content: "Auction details | ZameenDhan" }, { property: "og:description", content: "Bid live on this property." },
+    { title: "Auction details | Property24" }, { name: "description", content: "Live property auction with real-time bidding on Property24." },
+    { property: "og:title", content: "Auction details | Property24" }, { property: "og:description", content: "Bid live on this property." },
     { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" },
   ]}),
   component: AuctionPage,
