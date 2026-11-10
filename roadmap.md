@@ -17,3 +17,5 @@
 - [x] Remove placeholder service prices from customer screens; keep service requests free to submit until fees are supplied
 - [x] Set auction EMD separately per auction from its published terms; do not invent a universal iQuippo amount
 - [x] Remove fake payment records when users register auction interest; no money is collected yet
+- [ ] Connect the project to GitHub through Lovable Project settings → Git; the user must complete this connection in the UI
+- [ ] Confirm authorization to use the existing Property24 brand before changing the product name
