@@ -6,9 +6,9 @@ import heroImage from "@/assets/property-hero.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({ meta: [
-    { title: "ZameenDhan — Property Transaction, Legal & Auction Services" },
-    { name: "description", content: "Buying, selling, leasing, title verification, agreement drafting, RERA registration and live property auctions — handled by the ZameenDhan team." },
-    { property: "og:title", content: "ZameenDhan — Every property service, one platform" },
+    { title: "Property24 — Property Transaction, Legal & Auction Services" },
+    { name: "description", content: "Buying, selling, leasing, title verification, agreement drafting, RERA registration and live property auctions — handled by the Property24 team." },
+    { property: "og:title", content: "Property24 — Every property service, one platform" },
     { property: "og:description", content: "Transactions, legal & compliance and live auctions for owners, buyers and builders." },
     { property: "og:type", content: "website" },
     { name: "twitter:card", content: "summary_large_image" },
@@ -20,7 +20,7 @@ function HomePage() {
     <section className="market-hero" style={{ backgroundImage: `url(${heroImage})` }}>
       <div className="hero-shade"/><div className="hero-content content-width">
         <p className="hero-kicker">PROPERTY SERVICES, DONE FOR YOU</p>
-        <h1>ZameenDhan<br/>Property services.</h1>
+        <h1>Property24<br/>Property services.</h1>
         <p>Buying, selling, leasing or managing property paperwork? Choose your service, share the property details and keep your requests, documents and team conversations together.</p>
         <div className="hero-actions">
           <Button asChild size="lg"><Link to="/services/$category" params={{ category: "transaction" }}>Book a service <ArrowRight size={18}/></Link></Button>

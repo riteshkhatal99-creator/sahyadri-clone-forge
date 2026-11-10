@@ -80,9 +80,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "ZameenDhan" },
+      { title: "Property24" },
       { name: "description", content: "India's owner-first property marketplace." },
-      { name: "author", content: "ZameenDhan" },
+      { name: "author", content: "Property24" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

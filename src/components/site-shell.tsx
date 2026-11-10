@@ -7,7 +7,7 @@ import { useIsAdmin } from "@/hooks/use-is-admin";
 import { supabase } from "@/integrations/supabase/client";
 
 function Brand() {
-  return <span className="brand" aria-label="ZameenDhan"><span className="brand-mark"><span/></span><strong>Zameen</strong><b>Dhan</b></span>;
+  return <span className="brand" aria-label="Property24"><span className="brand-mark"><span/></span><strong>Property</strong><b>24</b></span>;
 }
 
 export function Header() {
@@ -47,12 +47,12 @@ export function Footer() {
   return <footer className="site-footer">
     <div className="footer-cta"><div className="content-width"><div><p>YOUR NEXT PROPERTY STEP</p><h2>Find the right service for your property.</h2></div><Button asChild variant="secondary"><Link to="/services/$category" params={{ category: "transaction" }}>Explore services</Link></Button></div></div>
     <div className="footer-grid content-width">
-      <div><Brand/><p className="footer-intro">Property transaction, legal & compliance and auction services across India.</p><p><MapPin size={17}/> Bengaluru, Karnataka, India</p><p><Phone size={17}/> 1800 309 2233</p><p><Mail size={17}/> hello@zameendhan.in</p></div>
+    <div><Brand/><p className="footer-intro">Property transaction, legal & compliance and auction services across India.</p><p><MapPin size={17}/> Bengaluru, Karnataka, India</p><p><Phone size={17}/> 1800 309 2233</p><p><Mail size={17}/> hello@zameendhan.in</p></div>
       <div><h3>Services</h3><Link to="/services/$category" params={{ category: "transaction" }}>Transaction services</Link><Link to="/services/$category" params={{ category: "legal" }}>Legal & compliance</Link><Link to="/auctions">Property auctions</Link><Link to="/properties" search={{ purpose: "Buy" }}>Browse properties</Link></div>
       <div><h3>Company</h3><Link to="/about">About us</Link><Link to="/contact">Contact</Link><Link to="/privacy">Privacy policy</Link><Link to="/terms">Terms of use</Link></div>
       <div><h3>Your account</h3><p>Keep your requests, shared documents and team conversations together.</p><Button asChild variant="outline" className="footer-outline"><Link to="/dashboard">My requests</Link></Button></div>
     </div>
-    <div className="footer-bottom content-width"><span>© 2026 ZameenDhan. All rights reserved.</span><span>Made for India's property seekers</span><div className="socials"><Facebook/><Instagram/><Youtube/><Linkedin/></div></div>
+    <div className="footer-bottom content-width"><span>© 2026 Property24. All rights reserved.</span><span>Made for India's property seekers</span><div className="socials"><Facebook/><Instagram/><Youtube/><Linkedin/></div></div>
   </footer>;
 }
 

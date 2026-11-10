@@ -8,8 +8,8 @@ import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/_authenticated/request/$service")({
   head: () => ({ meta: [
-    { title: "Request a service | ZameenDhan" }, { name: "description", content: "Share your property details and book a ZameenDhan service." },
-    { property: "og:title", content: "Request a service | ZameenDhan" }, { property: "og:description", content: "Book a property service." },
+    { title: "Request a service | Property24" }, { name: "description", content: "Share your property details and book a Property24 service." },
+    { property: "og:title", content: "Request a service | Property24" }, { property: "og:description", content: "Book a property service." },
     { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" },
   ]}),
   component: RequestPage,

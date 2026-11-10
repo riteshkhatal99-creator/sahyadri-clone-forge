@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { listProperties } from "@/lib/properties";
 import officeImage from "@/assets/property-office.jpg";
 
-export const Route = createFileRoute("/commercial")({ head:()=>({meta:[{title:"Commercial Property in India | ZameenDhan"},{name:"description",content:"Find offices, shops and commercial property for sale or rent across India."},{property:"og:title",content:"Commercial Property | ZameenDhan"},{property:"og:description",content:"Workspaces and commercial investments, directly from owners."},{property:"og:type",content:"website"},{name:"twitter:card",content:"summary_large_image"}]}), component: CommercialPage });
+export const Route = createFileRoute("/commercial")({ head:()=>({meta:[{title:"Commercial Property in India | Property24"},{name:"description",content:"Find offices, shops and commercial property for sale or rent across India."},{property:"og:title",content:"Commercial Property | Property24"},{property:"og:description",content:"Workspaces and commercial investments, directly from owners."},{property:"og:type",content:"website"},{name:"twitter:card",content:"summary_large_image"}]}), component: CommercialPage });
 function CommercialPage(){
   const { data: all = [] } = useQuery({ queryKey: ["properties"], queryFn: listProperties });
   const commercial=all.filter((p)=>p.purpose==="Commercial");

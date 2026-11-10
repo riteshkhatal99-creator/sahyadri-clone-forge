@@ -11,11 +11,11 @@ export const Route = createFileRoute("/services/$category")({
     return { category: params.category as Category };
   },
   head: ({ loaderData }) => {
-    if (!loaderData) return { meta: [{ title: "Service not found | ZameenDhan" }, { name: "robots", content: "noindex" }] };
+    if (!loaderData) return { meta: [{ title: "Service not found | Property24" }, { name: "robots", content: "noindex" }] };
     const info = categoryInfo[loaderData.category];
     return { meta: [
-      { title: `${info.title} | ZameenDhan` }, { name: "description", content: info.description },
-      { property: "og:title", content: `${info.title} | ZameenDhan` }, { property: "og:description", content: info.description },
+      { title: `${info.title} | Property24` }, { name: "description", content: info.description },
+      { property: "og:title", content: `${info.title} | Property24` }, { property: "og:description", content: info.description },
       { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" },
     ] };
   },

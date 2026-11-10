@@ -10,8 +10,8 @@ import { getService, inr, requestStatuses, statusLabel } from "@/lib/services";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
   head: () => ({ meta: [
-    { title: "My Dashboard | ZameenDhan" }, { name: "description", content: "Track your service requests, bids and auction deposits." },
-    { property: "og:title", content: "My Dashboard | ZameenDhan" }, { property: "og:description", content: "Track your requests and bids." },
+    { title: "My Dashboard | Property24" }, { name: "description", content: "Track your service requests, bids and auction deposits." },
+    { property: "og:title", content: "My Dashboard | Property24" }, { property: "og:description", content: "Track your requests and bids." },
     { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" },
   ]}),
   component: DashboardPage,

@@ -19,7 +19,7 @@ export function RequestThread({ requestId, asTeam }: { requestId: string; asTeam
     setMsg(""); qc.invalidateQueries({ queryKey: ["updates", requestId] });
   };
   return <div className="thread">
-    {data.map((u) => <div key={u.id} className={u.from_team ? "msg team" : "msg"}><b>{u.from_team ? "ZameenDhan team" : "You"}</b> {u.message}{u.file_path && <button type="button" onClick={() => openFile(u.file_path!)}>Open file</button>}</div>)}
+    {data.map((u) => <div key={u.id} className={u.from_team ? "msg team" : "msg"}><b>{u.from_team ? "Property24 team" : "You"}</b> {u.message}{u.file_path && <button type="button" onClick={() => openFile(u.file_path!)}>Open file</button>}</div>)}
     <div className="thread-input"><input value={msg} onChange={(e) => setMsg(e.target.value)} placeholder="Write a message"/><label className="file-btn">Attach<input type="file" hidden onChange={(e) => e.target.files?.[0] && send(e.target.files[0])}/></label><Button size="sm" onClick={() => send()}><Send size={14}/></Button></div>
   </div>;
 }

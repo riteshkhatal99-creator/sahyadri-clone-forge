@@ -10,9 +10,9 @@ const description = "Sign in to save homes, contact owners and manage your listi
 
 export const Route = createFileRoute("/login")({
   head: () => ({ meta: [
-    { title: "Sign In | ZameenDhan" },
+    { title: "Sign In | Property24" },
     { name: "description", content: description },
-    { property: "og:title", content: "Sign In | ZameenDhan" },
+    { property: "og:title", content: "Sign In | Property24" },
     { property: "og:description", content: description },
     { property: "og:type", content: "website" },
     { name: "twitter:card", content: "summary_large_image" },
@@ -68,7 +68,7 @@ function LoginPage() {
 
   return <section className="auth-page">
     <div className="auth-card">
-      <p className="eyebrow">{mode === "signin" ? "WELCOME BACK" : "JOIN ZAMEENDHAN"}</p>
+      <p className="eyebrow">{mode === "signin" ? "WELCOME BACK" : "JOIN PROPERTY24"}</p>
       <h1>{mode === "signin" ? "Sign in to your account" : "Create your free account"}</h1>
       <p className="auth-sub">Book services, track requests and bid in auctions.</p>
 
@@ -90,7 +90,7 @@ function LoginPage() {
       </form>
 
       <p className="auth-switch">
-        {mode === "signin" ? "New to ZameenDhan?" : "Already have an account?"}{" "}
+        {mode === "signin" ? "New to Property24?" : "Already have an account?"}{" "}
         <button type="button" onClick={() => { setMode(mode === "signin" ? "signup" : "signin"); setError(""); setNotice(""); }}>
           {mode === "signin" ? "Create an account" : "Sign in"}
         </button>
